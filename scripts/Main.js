@@ -1,6 +1,8 @@
 
 
 import {saveBittrexTransaction} from "./Exchanges/Bittrex.js";
+import {saveBinanceTransaction} from "./Exchanges/Binance.js";
+import {saveCoinbaseTransaction} from "./Exchanges/Coinbase.js";
 import {calculate} from "./Calculator.js";
 
 let allTransactions = [];
@@ -21,8 +23,7 @@ function handleInput(event)
         reader.onload= function(e)
         {
             let content = e.target.result;
-            let currentTransactions = saveBittrexTransaction(content);
-            let result = calculate("2017", currentTransactions);
+            let result = getTransactions(exchange, content);
             console.log(result);
         };
 
@@ -31,6 +32,22 @@ function handleInput(event)
     }
     document.body.style.cursor  = 'default';
 
+}
+
+function getTransactions(exchange, content)
+{
+    if(exchange == "bittrex")
+    {
+        return saveBittrexTransaction(content);
+    }
+    else if(exchange == "binance")
+    {
+        return saveBinanceTransaction(content);
+    }
+    else if(exchange == "coinbase")
+    {
+        return saveCoinbaseTransaction(content);
+    }
 }
 
 function startCalculation()
