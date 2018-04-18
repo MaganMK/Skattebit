@@ -1,6 +1,10 @@
+
 import {Transaction} from "../Transaction.js";
 export function saveCoinbaseTransaction(data)
 {
+
+}
+/*
     //0 date = 05/06/2017 10:02
     //1 balance
     //2 amount (antall enheter kjøpt av currency = 0.2262
@@ -75,6 +79,6 @@ class Coinbase(Exchange):
     def is_transaction(self,notes):
         return "bought" in notes.lower() or "sold" in notes
 
-
+*/
 
 

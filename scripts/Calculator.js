@@ -38,11 +38,12 @@ function sortByDate(groups)
     {
         let sales = groups[key]["sales"];
         let buys = groups[key]["buys"];
+
         sales.sort(function(txa, txb) {
-            return txa.date.getTime() - txb.date.getTime();
+            return new Date(txa.date).getTime() - new Date(txb.date).getTime();
         });
         buys.sort(function(txa, txb) {
-            return txa.date.getTime() - txb.date.getTime();
+            return new Date(txa.date).getTime() - new Date(txb.date).getTime();
         });
         groups[key]["sales"] = sales;
         groups[key]["buys"] = buys;
@@ -66,7 +67,7 @@ function calculateIncome(mainGroups, year)
                 let currentBuy = groups[key]["buys"][buyKey];
                 if (currentSale.quantity > 0)
                 {
-                    if (currentBuy.date.getTime() <= currentSale.date.getTime())
+                    if (new Date(currentBuy.date).getTime() <= new Date(currentSale.date).getTime())
                     {
                         if (currentBuy.quantity >= currentSale.quantity)
                         {
@@ -83,7 +84,7 @@ function calculateIncome(mainGroups, year)
                     }
                 }
             }
-            if (currentSale.date.getFullYear() == year)
+            if (new Date(currentSale.date).getFullYear() == year)
             {
                 filled += profit;
                 unfilled += currentSale.quantity * currentSale.unitPrice;
@@ -106,14 +107,14 @@ function getYearBalance(groups, year)
         let buys = groups[key]["buys"];
         for (let i in buys)
         {
-            if (buys[i].date.getTime() <= yearDate.getTime())
+            if (new Date(buys[i].date).getTime() <= new Date(yearDate).getTime())
             {
                 qty += buys[i].quantity;
             }
         }
         for (let i in sales)
         {
-            if (sales[i].date.getTime() <= yearDate.getTime())
+            if (new Date(sales[i].date).getTime() <= new Date(yearDate).getTime())
             {
                 qty -= sales[i].quantity;
             }

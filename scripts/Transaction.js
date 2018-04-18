@@ -1,3 +1,5 @@
+
+
 export class Transaction {
   constructor(name, quantity, date, isSale, site) {
     this.name = fixName(name);
@@ -7,11 +9,15 @@ export class Transaction {
     this.unitPrice = calculateUnitPrice(this);
     this.totalPrice = this.quantity * this.unitPrice;
     this.site = site;
+
+    //sleepFor(70);
+
   }
 
   toString() {
     return this.name + "," + this.date.toString() + "," + this.name + "," + this.quantity + "," + this.unitPrice + "," + this.totalPrice + "," + this.site;
   }
+
 }
 
 function calculateUnitPrice(tx)
@@ -36,4 +42,9 @@ function fixName(name) {
         return fixes[name]
     }
     return name
+}
+
+function sleepFor( sleepDuration ){
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
 }
