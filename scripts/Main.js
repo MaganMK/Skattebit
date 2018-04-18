@@ -45,7 +45,6 @@ function getAllTransactions() {
     for (let i = 0; i < saveCount; i++) {
         txs = (JSON.parse(sessionStorage.getItem(i)));
     }
-    console.log(txs);
     return txs;
 }
 
@@ -69,17 +68,12 @@ function getTransactions(exchange, content)
 
 function startCalculation()
 {
-    let result = 0;
+    let result = [];
     let dropdown = document.getElementById("year-selector");
     let year = dropdown.options[dropdown.selectedIndex].value;
-    for (let i = 0; i<saveCount; i++)
-    {
-        let currentTransaction = JSON.parse(sessionStorage.getItem(i));
-        console.log(currentTransaction);
-        result += calculate(year,currentTransaction);
-    }
+    let txs = getAllTransactions();
 
-    result = result.split(",");
+    result = calculate(year, txs);
     result[0] = Math.round(result[0]);
     result[1] = Math.round(result[1]);
     result[2] = Math.round(result[2]);
@@ -130,7 +124,6 @@ function createTable(txs, exchange)
 {
     var fileInput = document.getElementById(exchange.substring(0,exchange.length-1));
     let transactions = getTransactionStrings(txs);
-    console.log(transactions);
     let table = document.getElementById("transaction-table");
     txDiv.style.display = "block";
     let txCount = document.getElementById("tx-count");
