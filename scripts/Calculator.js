@@ -64,7 +64,7 @@ function calculateIncome(mainGroups, year)
             for (let buyKey in groups[key]["buys"])
             {
                 let currentBuy = groups[key]["buys"][buyKey];
-                if currentSale.quantity > 0
+                if (currentSale.quantity > 0)
                 {
                     if (currentBuy.date.getTime() <= currentSale.date.getTime())
                     {
@@ -83,7 +83,7 @@ function calculateIncome(mainGroups, year)
                     }
                 }
             }
-            if currentSale.date.getFullYear() == year
+            if (currentSale.date.getFullYear() == year)
             {
                 filled += profit;
                 unfilled += currentSale.quantity * currentSale.unitPrice;

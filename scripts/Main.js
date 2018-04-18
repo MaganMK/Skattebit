@@ -16,15 +16,17 @@ function handleInput(event)
     if(file.files.length)
     {
         let reader = new FileReader();
+
         reader.onload= function(e)
         {
             let content = e.target.result;
-            console.log(content);
             let currentTransactions = saveBittrexTransaction(content);
             console.log(currentTransactions);
-            allTransactions.concat(currentTransactions);
+
         };
+
         reader.readAsBinaryString(file.files[0]);
+
     }
 
 }
