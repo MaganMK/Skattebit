@@ -9,7 +9,6 @@ let saveCount = 0;
 
 var txDiv = document.getElementById("tx-table-div");
 
-
 function handleInput(event)
 {
     let exchange = event.target.id;
@@ -43,7 +42,8 @@ function handleInput(event)
 function getAllTransactions() {
     let txs = [];
     for (let i = 0; i < saveCount; i++) {
-        txs = (JSON.parse(sessionStorage.getItem(i)));
+        //txs.concat(JSON.parse(sessionStorage.getItem(i)));
+        txs.push.apply(txs, JSON.parse(sessionStorage.getItem(i)));
     }
     return txs;
 }
@@ -123,6 +123,11 @@ function getTransactionStrings(txs) {
 function createTable(txs, exchange)
 {
     var fileInput = document.getElementById(exchange.substring(0,exchange.length-1));
+    //Sorterer for mer oversikt i tabell, mulig det krever litt for mye tid
+    txs.sort(function(txa, txb)
+    {
+        return new Date(txa.date).getTime() - new Date(txb.date).getTime();
+    });
     let transactions = getTransactionStrings(txs);
     let table = document.getElementById("transaction-table");
     txDiv.style.display = "block";
