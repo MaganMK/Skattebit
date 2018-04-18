@@ -6,7 +6,8 @@
 .idea/workspace.xml
 *.xml
 .iws
-.xml 
+.xml
+*.iml
 
 
 
