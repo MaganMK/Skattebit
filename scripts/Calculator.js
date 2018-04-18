@@ -133,9 +133,12 @@ function calculateUnitPrice(date, currency)
     let timestamp = date.getTime()/1000;
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="
     + currency + "&tsyms=" + "NOK" + "&ts=" + timestamp;
-    jQuery.when(
-        jQuery.getJSON(url)
-    ).done( function(json) {
-        return json[currency]["NOK"];
-    });
+    let res = $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            async: false
+        }).responseText;
+    let json = JSON.parse(res);
+    return json[currency]["NOK"];
 }
