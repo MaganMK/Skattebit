@@ -1,6 +1,6 @@
-function calculate(year, transactions)
+export function calculate(year, transactions)
 {
-    let groups = group_transactions(transactions);
+    let groups = groupTransactions(transactions);
     let sortedGroups = sortByDate(groups);
 
     let yearBalance = getYearBalance(sortedGroups, year);

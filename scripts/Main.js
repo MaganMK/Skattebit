@@ -1,6 +1,7 @@
 
 
 import {saveBittrexTransaction} from "./Exchanges/Bittrex.js";
+import {calculate} from "./Calculator.js";
 
 let allTransactions = [];
 
@@ -21,13 +22,14 @@ function handleInput(event)
         {
             let content = e.target.result;
             let currentTransactions = saveBittrexTransaction(content);
-            console.log(currentTransactions);
-
+            let result = calculate("2017", currentTransactions);
+            console.log(result);
         };
 
         reader.readAsBinaryString(file.files[0]);
 
     }
+    document.body.style.cursor  = 'default';
 
 }
 
