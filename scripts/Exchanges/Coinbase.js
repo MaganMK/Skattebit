@@ -50,7 +50,7 @@ export function saveCoinbaseTransaction(data)
 
 function isTransaction(notes)
 {
-    return notes.toLowerCase().indexOf("bought") >= 0 || notes.toLowerCase().indexOf("sold");
+    return notes.toLowerCase().indexOf("bought") >= 0 || notes.toLowerCase().indexOf("sold") >= 0;
 }
 
 function getType(notes)
