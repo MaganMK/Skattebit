@@ -9,14 +9,27 @@ export class Transaction {
     this.unitPrice = calculateUnitPrice(this);
     this.totalPrice = this.quantity * this.unitPrice;
     this.site = site;
-    console.log("transaksjon: " + quantity + " " + isSale);
-
+    this.representation = this.toString();
     sleepFor(70);
 
   }
 
   toString() {
-    return this.name + "," + this.date.toString() + "," + this.name + "," + this.quantity + "," + this.unitPrice + "," + this.totalPrice + "," + this.site;
+    return this.name + "," + this.prettyDate() + "," + this.name + "," + this.prettyValue(this.quantity) + "," + this.prettyValue(this.unitPrice) + "," + this.prettyValue(this.totalPrice) + "," + this.site;
+  }
+
+  prettyDate() {
+        return this.date.getDate() + "/" + (this.date.getMonth()+1) + "/" + this.date.getFullYear() + " " + this.date.getHours() + ":" + this.date.getMinutes();
+  }
+
+  prettyValue(value) {
+        if (value < 10) {
+            return parseFloat(value).toFixed(5);
+        }
+        else if (value < 100) {
+            return parseFloat(value).toFixed(4);
+        }
+        return parseFloat(value).toFixed(2);
   }
 
 }

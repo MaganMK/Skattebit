@@ -1,3 +1,5 @@
+import {sleepFor} from "../Transaction.js";
+
 export function calculate(year, transactions)
 {
     let groups = groupTransactions(transactions);
@@ -141,5 +143,6 @@ function calculateUnitPrice(date, currency)
             async: false
         }).responseText;
     let json = JSON.parse(res);
+    sleepFor(70);
     return json[currency]["NOK"];
 }

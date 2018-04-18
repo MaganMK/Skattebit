@@ -121,8 +121,7 @@ function getTransactionStrings(txs) {
     let res = [];
     for (let i in txs)
     {
-        console.log(txs[i]);
-        res.push(txs[i].toString());
+        res.push(txs[i].representation);
     }
     return res;
 }
@@ -133,13 +132,6 @@ function createTable(txs, exchange)
     let transactions = getTransactionStrings(txs);
     console.log(transactions);
     let table = document.getElementById("transaction-table");
-    let header = ["#", "Valuta", "Tidspunkt", "Kjøp/Salg", "Kvantitet", "Enhetspris", "Totalpris", "Exchange"];
-    let row1 = table.insertRow(0);
-    row1.style = "font-weight: bold;";
-    for (let i = 0; i < header.length; i++) {
-        let cell = row1.insertCell(i);
-        cell.innerText = header[i];
-    }
     txDiv.style.display = "block";
     let txCount = document.getElementById("tx-count");
     let count = transactions.length;
