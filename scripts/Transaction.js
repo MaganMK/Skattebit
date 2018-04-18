@@ -1,5 +1,7 @@
+
+
 export class Transaction {
-  constructor(name, quantity, date, is_sale, site) {
+  constructor(name, quantity, date, isSale, site) {
     //this.name = fix_name(name)
     this.name = name;
     this.quantity = quantity;
@@ -17,7 +19,9 @@ export class Transaction {
 
 function calculateUnitPrice(tx)
 {
+
     let timestamp = tx.date.getTime()/1000;
+    console.log();
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="
     + tx.name + "&tsyms=" + "NOK" + "&ts=" + timestamp;
     jQuery.when(

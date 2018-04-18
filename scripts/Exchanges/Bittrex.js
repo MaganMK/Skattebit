@@ -2,7 +2,7 @@
 //from backend.Exchanges.Exchange import Exchange;
 
 
-import {Transaction} from "../Transaction";
+import {Transaction} from "../Transaction.js";
 
 
 // 0 --> id = 8a9bf807 - f899 - 4c07 - 95b8 - 9d312ef1e192
@@ -17,6 +17,8 @@ import {Transaction} from "../Transaction";
 export function saveBittrexTransaction(data)
 {
     let transactions = [];
+    data = data.split("\n");
+    data = data.slice(1);
     for (let index in data)
     {
         let line = data[index].split(",");
@@ -35,17 +37,18 @@ export function saveBittrexTransaction(data)
             sellTransaction = new Transaction(currencies[0], line[6], date, true, "Bittrex");
             buyTransaction = new Transaction(currencies[1], line[3], date, false, "Bittrex");
         }
-        transactions.append(sellTransaction);
-        transactions.append(buyTransaction);
+        transactions.push(sellTransaction);
+        transactions.push(buyTransaction);
     }
 
     return transactions;
 }
 
 
+// TODO: se på denne
 function createDate(dateString)
 {
-    console.log(dateString);
+    // console.log(dateString);
     return new Date(dateString);
 }
 
