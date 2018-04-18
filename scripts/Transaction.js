@@ -10,6 +10,8 @@ export class Transaction {
     this.totalPrice = this.quantity * this.unitPrice;
     this.site = site;
     this.representation = this.toString();
+    console.log(this.name);
+    console.log(this.date);
     sleepFor(70);
 
   }
@@ -36,7 +38,8 @@ export class Transaction {
 
 function calculateUnitPrice(tx)
 {
-    let timestamp = tx.date.getTime()/1000;
+    let timestamp = new Date(tx.date).getTime()/1000;
+    console.log(timestamp);
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="
     + tx.name + "&tsyms=" + "NOK" + "&ts=" + timestamp;
     let res = $.ajax({

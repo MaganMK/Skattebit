@@ -67,8 +67,10 @@ function getType(notes)
 
 
 // TODO: se på denne
+//05/06/2017 10:02
 function createDate(dateString)
 {
+    dateString = dateString.substring(3,5) + "/" + dateString.substring(0,2) + "/" + dateString.substring(6,dateString.length);
     return new Date(dateString);
 }
 
