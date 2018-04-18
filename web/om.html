@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Enkel og gratis skattekalkulator for kryptovaluta">
+    <meta name="keywords" content="Kryptovaluta, skatt, kryptoskatt, krypto, skatteetaten, bitcoinskatt, bitcoin, ethereum, skattekalkulator">
+    <meta name="author" content="Magnus Midtbø Kristiansen og Sindre Aarnes Aubert">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptokalkulator</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+<div class="row">
+    <div id = "header" class="col">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Kryptokalkulator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Kalkulator</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="om.html">Om<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class = "row about" >
+    <div class = "col">
+        <h4>Viktig informasjon</h4>
+        <p>Kalkulatoren kan inneholde feil, så det er viktig å se gjennom listen med transaksjoner for å se om det dukker opp noen rare verdier.
+            Hvis du for eksempel oppdager at enhetsprisen på en valuta er 0 betyr det antageligvis at noe er feil.
+            Det kan komme av rebrands, som for eksempel antshares -> NEO (den er håndtert).
+            Hvis du oppdager noe utenom det vanlige vil vi gjerne at du sender det til oss, slik at vi kan forbedre oss.
+        </p>
+    </div>
+</div>
+<div class = "row about" >
+    <div class = "col">
+        <h4>Hvordan bruker jeg kalkulatoren? </h4>
+        <p>Vi har gjort vårt beste for å gjøre kalkulatoren så enkel å bruke som mulig. Her har du en liten oppskrift:</p>
+        <ul>
+            <li>
+                Last ned csv-fil som inneholder alle transaksjonene dine fra exchangene du har brukt for å kjøpe kryptovaluta.
+            </li>
+            <li>
+                Last opp csv-filen til tilhørende knapp. Hvis du har hentet csv-fil fra coinbase skal du trykke på "Coinbase" og dermed laste opp filen.
+                Opplastnings-knappen blir grønn når opplastningen er ferdig (dette kan ta litt tid), og transaksjonene som blir registrert ender opp på bunnen av siden.
+            </li>
+            <li>
+                Last opp flere filer til samme exchange eller til andre exchanges.
+            </li>
+            <li>
+                Velg skatteår, hvis du skal fylle ut skattemelding for 2018 velger du 2017 som skatteår.
+            </li>
+            <li>
+                Trykk på "Regn ut" og vent en stund (Dette kan ta flere minutter hvis du har hundrevis av transaksjoner).
+            </li>
+        </ul>
+    </div>
+</div>
+<div class = "row about">
+    <div class = "col">
+        <h4>Hvordan bruker jeg resultatet? </h4>
+        <p>Vi gir deg tre resultater:</p>
+        <p><strong>Inntekt</strong> <br>Inntekt gir deg gevinst/tap for alle transaksjoner der kalkulatoren har funnet et tidligere kjøp. Da finner kalkulatoren differansen mellom salgsprisen og kjøpsprisen.</p>
+        <p><strong>Inntekt for salg uten kjøp</strong><br>Hvis kalkulatoren finner salg der det ikke er noen tidligere kjøp å matche den med, vil den legge hele verdien av dette salget til i denne blokken.<br>Dette kan komme av at du ikke har lastet opp nok transaksjons-dokumenter, eller at det har skjedd noe galt under utregningen.</p>
+        <p><strong>Balanse</strong><br>Balansen viser totalverdien til kryptobeholdningen din ved årsslutt for dokumentene du har lastet inn.</p>
+        <p>
+            De to inntektene legger du sammen og fører inn under post 3.1.12 - annen inntekt i skattemeldingen din hvis den er positiv (gevinst), eller post 3.3.7 hvis den er negativ (tap). Balansen føres inn under post 4.5.4 - annen skattepliktig formue i skattemeldingen din.
+        </p>
+
+    </div>
+</div>
+<div class = "row about">
+    <div class = "col">
+        <h4>Hvordan får jeg tak i filene jeg skal laste opp? </h4>
+        <p>Hvis det blir etterspurt instruksjoner for flere ulike exchanges lagt til.</p>
+        <p><strong>Bittrex</strong></p>
+        <ul>
+            <li>Logg inn på Bittrex</li>
+            <li>Trykk på <strong>Orders</strong> øverst i høyre hjørne</li>
+            <li>Trykk på <strong>Download History</strong></li>
+            <li>Trykk på <strong>Download</strong></li>
+        </ul>
+    </div>
+</div>
+<div class = "row about">
+    <div class = "col">
+        <h4>Hvordan fungerer kalkulatoren? </h4>
+        <ul>
+            <li>Programmet leser filene du sender inn.</li>
+            <li>Alle transaksjoner deles inn i et kjøp og et salg.</li>
+            <li>Vi henter enhetsprisen for valutaene i transaksjonen fra <a href = "https://www.cryptocompare.com/api/#" target="_blank">CryptoCompares</a> API fra datoen transaksjonen ble utført.</li>
+            <li>Vi går gjennom hvert salg og finner et tidligere kjøp (FIFO), og regner ut differansen.</li>
+            <li>Til slutt går vi gjennom hvert salg som ikke har blitt fylt opp av et kjøp, og legger sammen den resterende verdien.</li>
+        </ul>
+    </div>
+</div>
+<footer>
+    <p><br><br>Laget av Magnus Midtbø Kristiansen og Sindre Aarnes Aubert.</p>
+    <p>Ikke nøl med å sende mail hvis du lurer på noe eller har forbedringsforslag til skattebit@gmail.com.</p>
+    <p>Er du veldig fornøyd med tjenesten? Donér noen satoshis da vel!</p>
+    <p><strong>BTC: </strong>3LrBRJPkdeXc6YXWsi44yVEfmdf1orgaNr
+        <br><strong>ETH: </strong>0x068d5a23982f75072d6D2690494EB9C4af43af8f
+        <br><strong>LTC: </strong>MRK5RZXLDpFtRNM1Pm37T1jfy6EUwRaMc8
+    </p>
+    <p>Priser er basert på <a href = "https://www.cryptocompare.com/api/#" target="_blank">CryptoCompares</a> API.</p>
+</footer>
+</body>
+</html>

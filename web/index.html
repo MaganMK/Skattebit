@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Enkel og gratis skattekalkulator for kryptovaluta">
+    <meta name="keywords" content="Kryptovaluta, skatt, kryptoskatt, krypto, skatteetaten, bitcoinskatt, bitcoin, ethereum, skattekalkulator">
+    <meta name="author" content="Magnus Midtbø Kristiansen og Sindre Aarnes Aubert">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptokalkulator</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Alle scripts -->
+    <script src = "../scripts/Main.js" type="module"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="row">
+    <div id = "header" class="col">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Kryptokalkulator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Kalkulator<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="om.html">Om</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class = "row">
+    <div class = "col wrapper" id = "info">
+        <div id = "info-wrapper">
+            <h4>Velkommen!</h4>
+            <p></p>
+            <p>Målet med denne nettsiden er å gjøre det enkelt og <strong>gratis</strong> for deg å regne ut inntekt av transaksjoner du har gjort på ulike handelssteder for kryptovaluta og formue av kryptobeholdningen din ved årsslutt.</p>
+            <p>I følge <a href = "https://www.skatteetaten.no/bedrift-og-organisasjon/rapportering-og-bransjer/bransjer-med-egne-regler/internett/skatte--og-merverdiavgiftsmessig-behandling-av-bitcoins-og-andre-virtuelle-valutaer/" target="_blank">Skatteetaten</a> er hver transaksjon mellom to kryptovalutaer realisering av gevinst eller tap.</p>
+            <p><strong>Vi fraskriver oss alt ansvar</strong> for korrektheten av resultatet kalkulatoren gir og råder deg til å kun bruke resultatet som et estimat. Vi fraskriver oss også alt ansvar for personvern og sikkerhet rundt opplysningene du sender.</p>
+            <p>Les mer om hvordan kalkulatoren fungerer og hvordan du bruker den <a href = "om.html">her.</a></p>
+            <p>Kalkulatoren bruker litt tid på å registrere transaksjoner og regne ut resultat, så <strong>vær tålmodig</strong>. En fil med 50 transaksjoner behandles på ca 30 sekunder.</p>
+            <p>Har du forslag til exchanges vi kan implementere støtte for? Send oss en csv-fil fra den aktuelle exchangen på <strong>skattebit@gmail.com</strong>, så fikser vi det fort.</p>
+        </div>
+    </div>
+</div>
+<div class = "row">
+    <div class = "col" id = "file-info">
+        <h5 class = "centered-text">Last opp fil i csv-format til tilhørende exchange.</h5>
+        <p style = "color: gray;" class = "centered-text">* Når en fil er ferdig behandlet vil transaksjonene dukke opp i bunnen av nettsiden.</p>
+    </div>
+</div>
+<form method="post" enctype="multipart/form-data">
+
+    <div class = "row">
+        <div class = "col">
+            <div class = "wrapper">
+                <label for = "bittrex" id = "bittre" class="btn btn-default file-container">
+                    Bittrex<input type="file" id="bittrex" name="bittrex" single>
+                </label>
+            </div>
+        </div>
+        <div class = "col">
+            <div class = "wrapper">
+                <label for = "binance" id = "binanc" class="btn btn-default file-container">
+                    Binance<input type="file" id="binance" name="binance" single hidden>
+                </label>
+            </div>
+        </div>
+        <div class = "col">
+            <div class = "wrapper">
+                <label for = "coinbase" id = "coinbas" class="btn btn-default file-container">
+                    Coinbase<input type="file" id="coinbase" name="coinbase" single hidden>
+                </label>
+            </div>
+        </div>
+    </div>
+</form>
+<div class = "row">
+    <div class = "col"></div>
+    <div class = "col">
+        <div class = "wrapper">
+            <select id="year-selector">
+                <option value="" disabled selected>Skatteår</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+            </select>
+        </div>
+    </div>
+    <div class = "col"></div>
+</div>
+<div class = "row">
+    <div class = "col"></div>
+    <div class = "col">
+        <div class = "wrapper">
+            <button id = "submit-btn" class = "btn btn-block">Regn ut</button>
+        </div>
+    </div>
+    <div class = "col"></div>
+</div>
+<div class = "row">
+    <div class = "col">
+        <div class = "wrapper">
+            <div class = "box" id = "box1">
+                <h5>Inntekt</h5>
+                <h2 id = "filled" class = "centered-text"></h2>
+                <p class = "centered-text" id = "explanation-text">* Inntekt for alle salg som kalkulatoren har funnet tilhørende kjøp til.</p>
+            </div>
+        </div>
+    </div>
+    <div class = "col">
+        <div class = "wrapper" >
+            <div class = "box" id = "box2">
+                <h5>Inntekt for salg uten kjøp</h5>
+                <h2 id = "unfilled" class = "centered-text"></h2>
+                <p class = "centered-text" id = "explanation-text">* Inntekt for alle salg som kalkulatoren <strong>ikke</strong> har funnet tilhørende kjøp til.</p>
+            </div>
+        </div>
+    </div>
+    <div class = "col">
+        <div class = "wrapper">
+            <div class = "box" id = "box3">
+                <h5 id = "balance-header">Balanse</h5>
+                <h2 id = "balance" class = "centered-text"></h2>
+                <p class = "centered-text" id = "explanation-text">* Hvis valgt år er inneværende år vil balansen vise dagens balanse.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class = "col" id = "tx-table-div">
+        <h5 id = "tx-count" class = "centered-text">Registrerte transaksjoner: 0</h5>
+        <p style = "color: gray;" class = "centered-text">* Hver handel regnes som to transaksjoner.
+            <br>* Hvis en rad er rød betyr det at noe gikk galt med registrering av transaksjonen.</p>
+        <div class = "wrapper">
+            <table id = "transaction-table" class = "table-striped table-responsive table-hover">
+
+            </table>
+        </div>
+    </div>
+</div>
+<footer>
+    <p><br><br>Laget av Magnus Midtbø Kristiansen og Sindre Aarnes Aubert.</p>
+    <p>Ikke nøl med å sende mail hvis du lurer på noe eller har forbedringsforslag til skattebit@gmail.com.</p>
+    <p>Er du veldig fornøyd med tjenesten? Donér noen satoshis da vel!</p>
+    <p><strong>BTC: </strong>3LrBRJPkdeXc6YXWsi44yVEfmdf1orgaNr
+        <br><strong>ETH: </strong>0x068d5a23982f75072d6D2690494EB9C4af43af8f
+        <br><strong>LTC: </strong>MRK5RZXLDpFtRNM1Pm37T1jfy6EUwRaMc8
+    </p>
+    <p>Priser er basert på <a href = "https://www.cryptocompare.com/api/#" target="_blank">CryptoCompares</a> API.</p>
+</footer>
+</body>
+</html>
