@@ -1,9 +1,15 @@
+.idea/*
+.idea/
+
 *.iws
 *.xml 
 .idea/workspace.xml
 *.xml
 .iws
 .xml 
+
+
+
 
 # User-specific stuff:
 **/.idea/workspace.xml
