@@ -5,6 +5,7 @@
 import {Transaction} from "../Transaction.js";
 
 
+
 // 0 --> id = 8a9bf807 - f899 - 4c07 - 95b8 - 9d312ef1e192
 // 1 --> exchange = BTC - ADA
 // 2 --> type = LIMIT_SELL

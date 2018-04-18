@@ -1,9 +1,6 @@
-
-
 export class Transaction {
   constructor(name, quantity, date, isSale, site) {
-    //this.name = fix_name(name)
-    this.name = name;
+    this.name = fixName(name);
     this.quantity = quantity;
     this.isSale = isSale;
     this.date = date;
@@ -19,22 +16,25 @@ export class Transaction {
 
 function calculateUnitPrice(tx)
 {
-
     let timestamp = tx.date.getTime()/1000;
     console.log();
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="
     + tx.name + "&tsyms=" + "NOK" + "&ts=" + timestamp;
-    jQuery.when(
-        jQuery.getJSON(url)
-    ).done( function(json) {
-        return json[tx.name]["NOK"];
-    });
+    let res = $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            async: false
+        }).responseText;
+    let json = JSON.parse(res);
+    return json[tx.name]["NOK"];
 }
-/*
-function fix_name(name) {
+
+function fixName(name) {
     let fixes = {"ANS": "NEO", "BCC": "BCH"}
-    if name in fixes.keys():
+    if (name in fixes)
+    {
         return fixes[name]
+    }
     return name
 }
-*/
