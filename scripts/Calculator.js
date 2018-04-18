@@ -52,7 +52,7 @@ function sortByDate(groups)
 
 function calculateIncome(mainGroups, year)
 {
-    let groups = jQuery.extend({}, mainGroups;
+    let groups = jQuery.extend({}, mainGroups);
     let filled = 0;
     let unfilled = 0;
     for (let key in groups)
