@@ -1,4 +1,5 @@
 import {Transaction} from "../Transaction.js";
+
 export function saveCoinbaseTransaction(data)
 {
     //0 date = 05/06/2017 10:02
@@ -25,56 +26,46 @@ export function saveCoinbaseTransaction(data)
         let lines = data[index].split(",");
         if (isTransaction(lines[5]))
         {
-            let type = 
+            let type = getType(lines[5]);
+            let date = createDate(lines[0]);
+            let currency = lines[3];
+            if (type == "SELL")
+            {
+                let sellTransaction = new Transaction(currency, Math.abs(lines[2]), date, true, "Coinbase");
+                transactions.push(sellTransaction);
+            }
+            else
+            {
+                let buyTransaction = new Transaction(currency, Math.abs(lines[2]), date, false, "Coinbase");
+                transactions.push(buyTransaction);
+            }
         }
+    }
     return transactions;
 }
 
-function isTransaction(notes):
+function isTransaction(notes)
+{
     return notes.toLowerCase().indexOf("bought") >= 0 || notes.toLowerCase().indexOf("sold");
+}
 
-function get_type(self, notes):
-    if "bought" in notes.toLowerCase():
-        return "BUY"
-    else:
-        return "SALE"
-
-from backend.Exchanges.Exchange import Exchange
-from backend.Transaction import *
-
-class Coinbase(Exchange):
-
-    #OBS! Vet ikke hvordan csv ser ut ved salg
-
-    def save_transactions(self, data):
-
-        transactions = []
-        for line in data:
-            if (len(line) > 0):
-                lines = line.split(",")
-                #Sjekker om "transaksjonen" er en overføring, isåfall er lengden på notes 0?
-                if self.is_transaction(lines[5]):
-                    type = self.get_type(lines[5])
-                    date = self.create_date(lines[0])
-                    currency = lines[3]
-                    if (type == "SELL"):
-                        sell_transaction = Transaction(currency, abs(float(lines[2])), date, True, "Coinbase")
-                        transactions.append(sell_transaction)
-                    else:
-                        buy_transaction = Transaction(currency, abs(float(lines[2])), date, False, "Coinbase")
-                        transactions.append(buy_transaction)
-        return transactions
+function getType(notes)
+{
+    if (notes.toLowerCase().indexOf("bought") >= 0)
+    {
+        return "BUY";
+    }
+    else
+    {
+        return "SALE";
+    }
+}
 
 
-    def get_type(self, notes):
-        if "Bought" in notes:
-            return "BUY"
-        else:
-            return "SALE"
-
-    def is_transaction(self,notes):
-        return "bought" in notes.lower() or "sold" in notes
-
-
+// TODO: se på denne
+function createDate(dateString)
+{
+    return new Date(dateString);
+}
 
 
