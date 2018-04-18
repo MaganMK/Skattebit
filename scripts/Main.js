@@ -1,5 +1,3 @@
-
-
 import {saveBittrexTransaction} from "./Exchanges/Bittrex.js";
 import {saveBinanceTransaction} from "./Exchanges/Binance.js";
 import {saveCoinbaseTransaction} from "./Exchanges/Coinbase.js";
@@ -8,6 +6,10 @@ import {calculate} from "./Calculator.js";
 let saveCount = 0;
 
 var txDiv = document.getElementById("tx-table-div");
+var selector = document.getElementById("year-selector");
+var calcBtn = document.getElementById("submit-btn");
+calcBtn.disabled = true;
+txDiv.style.display = "none";
 
 function handleInput(event)
 {
@@ -15,7 +17,7 @@ function handleInput(event)
     let fileInput = document.getElementById(exchange.substring(0,exchange.length-1));
     fileInput.style.backgroundColor = "#c6e9ff";
     fileInput.style.borderColor = "#79ccff";
-    document.body.style.cursor  = 'wait';
+    document.body.style.cursor  = 'wait; !important';
     let file = document.getElementById(exchange);
 
     if(file.files.length)
@@ -42,7 +44,6 @@ function handleInput(event)
 function getAllTransactions() {
     let txs = [];
     for (let i = 0; i < saveCount; i++) {
-        //txs.concat(JSON.parse(sessionStorage.getItem(i)));
         txs.push.apply(txs, JSON.parse(sessionStorage.getItem(i)));
     }
     return txs;
@@ -155,3 +156,15 @@ function createTable(txs, exchange)
     fileInput.style.borderColor = "#008927";
     document.body.style.cursor  = 'default';
 }
+
+selector.addEventListener("change", function() {
+    let val = selector.options[selector.selectedIndex].value;
+    let validYears = ["2015", "2016", "2017", "2018"];
+    if (validYears.indexOf(val) >= 0) {
+        selector.style.backgroundColor = "#c5ffc4";
+        selector.style.border = "solid #78d877";
+        calcBtn.style.backgroundColor = "#c5ffc4";
+        calcBtn.style.border = "solid #78d877";
+        calcBtn.disabled = false;
+    }
+})

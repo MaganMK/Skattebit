@@ -15,11 +15,21 @@ export class Transaction {
   }
 
   toString() {
-    return this.name + "," + this.prettyDate() + "," + this.name + "," + this.prettyValue(this.quantity) + "," + this.prettyValue(this.unitPrice) + "," + this.prettyValue(this.totalPrice) + "," + this.site;
+    let sale = (this.isSale ? "Salg" : "Kjøp");
+    return this.name + "," + this.prettyDate() + "," + sale + "," + this.prettyValue(this.quantity) + "," + this.prettyValue(this.unitPrice) + "," + this.prettyValue(this.totalPrice) + "," + this.site;
   }
 
   prettyDate() {
-        return this.date.getDate() + "/" + (this.date.getMonth()+1) + "/" + this.date.getFullYear() + " " + this.date.getHours() + ":" + this.date.getMinutes();
+        let d = this.addZero(this.date.getDate());
+        let m = this.addZero(this.date.getMonth()+1);
+        let h = this.addZero(this.date.getHours());
+        let min = this.addZero(this.date.getMinutes());
+        return  d + "/" + m + "/" + this.date.getFullYear() + " " + h + ":" + min;
+  }
+
+  addZero(number)
+  {
+    return number < 10 ? "0" + number : number;
   }
 
   prettyValue(value) {

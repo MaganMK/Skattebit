@@ -2,6 +2,7 @@ export function calculate(year, transactions)
 {
     let groups = groupTransactions(transactions);
     let sortedGroups = sortByDate(groups);
+    console.log(sortedGroups);
 
     let yearBalance = getYearBalance(sortedGroups, year);
     let incomeResults = calculateIncome(sortedGroups, year);
