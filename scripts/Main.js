@@ -56,4 +56,6 @@ function startCalculation()
 }
 
 document.getElementById("bittrex").addEventListener("change", handleInput, false);
+document.getElementById("binance").addEventListener("change", handleInput, false);
+document.getElementById("coinbase").addEventListener("change", handleInput, false);
 document.getElementById("submit-btn").addEventListener("click", startCalculation, false);

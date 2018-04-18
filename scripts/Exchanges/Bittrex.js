@@ -49,7 +49,6 @@ export function saveBittrexTransaction(data)
 // TODO: se på denne
 function createDate(dateString)
 {
-    // console.log(dateString);
     return new Date(dateString);
 }
 
