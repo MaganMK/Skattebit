@@ -13,8 +13,15 @@ export function saveBinanceTransaction(data)
     let transactions = [];
     data = data.split("\n");
     data = data.slice(1);
+    while (data[data.length-1].length == 0)
+    {
+        data.splice(-1,1);
+    }
     for (let index in data)
     {
+        if (data[index].length == 0)
+        {
+        }
         let lines = data[index].split(",");
         let type = lines[2];
         let currencies = getTradingPair(lines[1]);

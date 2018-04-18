@@ -9,8 +9,9 @@ export class Transaction {
     this.unitPrice = calculateUnitPrice(this);
     this.totalPrice = this.quantity * this.unitPrice;
     this.site = site;
+    console.log("transaksjon: " + quantity + " " + isSale);
 
-    //sleepFor(70);
+    sleepFor(70);
 
   }
 

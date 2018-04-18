@@ -7,6 +7,8 @@ import {calculate} from "./Calculator.js";
 
 let saveCount = 0;
 
+var txDiv = document.getElementById("tx-table-div");
+
 
 function handleInput(event)
 {
@@ -26,13 +28,25 @@ function handleInput(event)
             let content = e.target.result;
             let transactions = getTransactions(exchange, content);
             sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
+            let txs = getAllTransactions();
+            createTable(txs, exchange);
         };
 
         reader.readAsBinaryString(file.files[0]);
 
     }
+
     document.body.style.cursor  = 'default';
 
+}
+
+function getAllTransactions() {
+    let txs = [];
+    for (let i = 0; i < saveCount; i++) {
+        txs = (JSON.parse(sessionStorage.getItem(i)));
+    }
+    console.log(txs);
+    return txs;
 }
 
 function getTransactions(exchange, content)
@@ -102,3 +116,52 @@ document.getElementById("bittrex").addEventListener("change", handleInput, false
 document.getElementById("binance").addEventListener("change", handleInput, false);
 document.getElementById("coinbase").addEventListener("change", handleInput, false);
 document.getElementById("submit-btn").addEventListener("click", startCalculation, false);
+
+function getTransactionStrings(txs) {
+    let res = [];
+    for (let i in txs)
+    {
+        console.log(txs[i]);
+        res.push(txs[i].toString());
+    }
+    return res;
+}
+
+function createTable(txs, exchange)
+{
+    var fileInput = document.getElementById(exchange.substring(0,exchange.length-1));
+    let transactions = getTransactionStrings(txs);
+    console.log(transactions);
+    let table = document.getElementById("transaction-table");
+    let header = ["#", "Valuta", "Tidspunkt", "Kjøp/Salg", "Kvantitet", "Enhetspris", "Totalpris", "Exchange"];
+    let row1 = table.insertRow(0);
+    row1.style = "font-weight: bold;";
+    for (let i = 0; i < header.length; i++) {
+        let cell = row1.insertCell(i);
+        cell.innerText = header[i];
+    }
+    txDiv.style.display = "block";
+    let txCount = document.getElementById("tx-count");
+    let count = transactions.length;
+    txCount.innerText = "Registrerte transaksjoner: " + count;
+    for(let i in transactions)
+    {
+        //lines[4] gir enhetspris
+        let lines = transactions[i].split(",");
+        var row = table.insertRow(++i);
+        if (lines[4] == 0) {
+            row.className = "table-danger";
+        }
+        for(let i = 0; i < lines.length; i++)
+        {
+            let cell = row.insertCell(i);
+            cell.innerText = lines[i];
+        }
+        let cell = row.insertCell(0);
+        cell.innerText = i;
+    }
+
+    fileInput.style.backgroundColor = "#e0ffd8";
+    fileInput.style.borderColor = "#008927";
+    document.body.style.cursor  = 'default';
+}

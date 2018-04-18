@@ -20,6 +20,10 @@ export function saveBittrexTransaction(data)
     let transactions = [];
     data = data.split("\n");
     data = data.slice(1);
+    while (data[data.length-1].length == 0)
+    {
+        data.splice(-1,1);
+    }
     for (let index in data)
     {
         let line = data[index].split(",");
