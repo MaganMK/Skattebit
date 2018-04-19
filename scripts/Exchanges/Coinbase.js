@@ -33,7 +33,7 @@ export function saveCoinbaseTransaction(data)
             let type = getType(lines[5]);
             let date = createDate(lines[0]);
             let currency = lines[3];
-            if (type == "SELL")
+            if (type == "SALE")
             {
                 let sellTransaction = new Transaction(currency, Math.abs(lines[2]), date, true, "Coinbase");
                 transactions.push(sellTransaction);
