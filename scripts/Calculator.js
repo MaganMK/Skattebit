@@ -2,6 +2,7 @@ export function calculate(year, transactions)
 {
     let groups = groupTransactions(transactions);
     let sortedGroups = sortByDate(groups);
+    console.log("start");
     console.log(sortedGroups);
 
     let yearBalance = getYearBalance(sortedGroups, year);
@@ -68,6 +69,7 @@ function calculateIncome(mainGroups, year)
                 let currentBuy = groups[key]["buys"][buyKey];
                 if (currentSale.quantity > 0)
                 {
+
                     if (new Date(currentBuy.date).getTime() <= new Date(currentSale.date).getTime())
                     {
                         if (currentBuy.quantity >= currentSale.quantity)
@@ -79,8 +81,8 @@ function calculateIncome(mainGroups, year)
                         else
                         {
                             profit += currentSale.unitPrice * currentBuy.quantity - currentBuy.unitPrice * currentBuy.quantity;
-                            currentBuy.quantity = currentSale.quantity;
-                            currentSale.quantity -= currentBuy.quantity
+                            currentSale.quantity -= currentBuy.quantity;
+                            currentBuy.quantity = 0;
                         }
                     }
                 }
@@ -103,21 +105,21 @@ function getYearBalance(groups, year)
     let balance = 0;
     for (let key in groups)
     {
-        let qty = 0;
+        let qty = 0.0;
         let sales = groups[key]["sales"];
         let buys = groups[key]["buys"];
         for (let i in buys)
         {
             if (new Date(buys[i].date).getTime() <= new Date(yearDate).getTime())
             {
-                qty += buys[i].quantity;
+                qty += parseFloat(buys[i].quantity);
             }
         }
         for (let i in sales)
         {
             if (new Date(sales[i].date).getTime() <= new Date(yearDate).getTime())
             {
-                qty -= sales[i].quantity;
+                qty -= parseFloat(sales[i].quantity);
             }
         }
         let currencyBalance = calculateUnitPrice(yearDate, key) * qty;
@@ -142,6 +144,7 @@ function calculateUnitPrice(date, currency)
             async: false
         }).responseText;
     let json = JSON.parse(res);
+    console.log(json);
     sleepFor(70);
     return json[currency]["NOK"];
 }

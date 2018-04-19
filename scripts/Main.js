@@ -78,6 +78,7 @@ function startCalculation()
     result[0] = Math.round(result[0]);
     result[1] = Math.round(result[1]);
     result[2] = Math.round(result[2]);
+    let tot_income = result[0] + result[1];
 
     let green = "#c5ffc4";
     let greenBorder = "#78d877";
@@ -87,6 +88,8 @@ function startCalculation()
     let box1Border = result[0] >= 0 ? greenBorder : redBorder;
     let box2Color = result[1] >= 0 ? green : red;
     let box2Border = result[1] >= 0 ? greenBorder : redBorder;
+    let box4Color = tot_income >= 0 ? green : red;
+    let box4Border = tot_income >= 0 ? greenBorder : redBorder;
 
     box1.style.backgroundColor = box1Color;
     box1.style.border = "solid " + box1Border;
@@ -97,12 +100,19 @@ function startCalculation()
     box3.style.backgroundColor = green;
     box3.style.border = "solid " + greenBorder;
 
+    box4.style.backgroundColor = box4Color;
+    box4.style.border = "solid " + box4Border;
 
+    let chosen = new Date("12/31/" + year);
+    let now = new Date();
+    let nowString = "Balanse " + now.getDate() + "." + (now.getMonth() + 1) + "." + year;
+    let dateText = (chosen.getTime() > now.getTime() ? nowString : "Balanse 31.12." + year);
+    document.getElementById("balance-header").innerText = dateText;
 
-    document.getElementById("balance-header").innerText = "Balanse 31.12." + year;
     
     document.getElementById("filled").innerText = "\n\n\n" + result[0] + " kr";
     document.getElementById("unfilled").innerText = "\n\n\n" + result[1] + " kr";
+    document.getElementById("income").innerText = "\n\n\n" + tot_income + " kr";
     document.getElementById("balance").innerText = "\n\n\n" + result[2] + " kr";
     document.body.style.cursor  = 'default';
 }
@@ -129,8 +139,17 @@ function createTable(txs, exchange)
     {
         return new Date(txa.date).getTime() - new Date(txb.date).getTime();
     });
-    let transactions = getTransactionStrings(txs);
     let table = document.getElementById("transaction-table");
+    let transactions = getTransactionStrings(txs);
+    $("#transaction-table tr").remove();
+    let header = ["#", "Valuta", "Tidspunkt", "Kjøp/Salg", "Kvantitet", "Enhetspris", "Totalpris", "Exchange"];
+    let row1 = table.insertRow(0);
+    row1.style = "font-weight: bold;";
+    for (let i = 0; i < header.length; i++) {
+        let cell = row1.insertCell(i);
+        cell.innerText = header[i];
+    }
+
     txDiv.style.display = "block";
     let txCount = document.getElementById("tx-count");
     let count = transactions.length;
