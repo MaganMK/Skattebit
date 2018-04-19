@@ -28,7 +28,7 @@ export function saveCoinbaseTransaction(data)
     for (let index in data)
     {
         let lines = data[index].split(",");
-        if (isTransaction(lines[5]))
+        if (isTransaction(lines)
         {
             let type = getType(lines[5]);
             let date = createDate(lines[0]);
@@ -48,9 +48,9 @@ export function saveCoinbaseTransaction(data)
     return transactions;
 }
 
-function isTransaction(notes)
+function isTransaction(lines)
 {
-    return notes.toLowerCase().indexOf("bought") >= 0 || notes.toLowerCase().indexOf("sold") >= 0;
+    return lines[5].toLowerCase().indexOf("bought") >= 0 || lines[7].length > 0;
 }
 
 function getType(notes)
