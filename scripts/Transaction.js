@@ -47,6 +47,7 @@ export class Transaction {
 function calculateUnitPrice(tx)
 {
     let timestamp = new Date(tx.date).getTime()/1000;
+    console.log(timestamp);
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="
     + tx.name + "&tsyms=" + "NOK" + "&ts=" + timestamp;
     let res = $.ajax({
@@ -56,6 +57,7 @@ function calculateUnitPrice(tx)
             async: false
         }).responseText;
     let json = JSON.parse(res);
+    console.log(json);
     return json[tx.name]["NOK"];
 }
 
