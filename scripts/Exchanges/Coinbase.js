@@ -28,7 +28,7 @@ export function saveCoinbaseTransaction(data)
     for (let index in data)
     {
         let lines = data[index].split(",");
-        if (isTransaction(lines)
+        if (isTransaction(lines))
         {
             let type = getType(lines[5]);
             let date = createDate(lines[0]);
