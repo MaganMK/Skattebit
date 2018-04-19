@@ -1,0 +1,5 @@
+Ting å ta med videre:
+- Eksperimentere med ui
+- info om csv
+- flere exchanges
+- scrolle ned til kalk om man trykker på kalkulator
