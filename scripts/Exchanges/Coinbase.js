@@ -70,7 +70,8 @@ function getType(notes)
 //05/06/2017 10:02
 function createDate(dateString)
 {
-    dateString = dateString.substring(3,5) + "/" + dateString.substring(0,2) + "/" + dateString.substring(6,dateString.length);
+
+    dateString = dateString.substring(5,7)+ "/" + dateString.substring(8,10)  +"/" + dateString.substring(0,4) + " " + dateString.substring(11,19);
     return new Date(dateString);
 }
 
