@@ -105,8 +105,8 @@ function startCalculation()
 
     let chosen = new Date("12/31/" + year);
     let now = new Date();
-    let nowString = "Balanse " + now.getDate() + "." + (now.getMonth() + 1) + "." + year;
-    let dateText = (chosen.getTime() > now.getTime() ? nowString : "Balanse 31.12." + year);
+    let nowString = "Balanse " + addZero(now.getDate()) + "/" + addZero(now.getMonth() + 1) + "/" + year;
+    let dateText = (chosen.getTime() > now.getTime() ? nowString : "Balanse 31/12/" + year);
     document.getElementById("balance-header").innerText = dateText;
 
     
@@ -186,4 +186,9 @@ selector.addEventListener("change", function() {
         calcBtn.style.border = "solid #78d877";
         calcBtn.disabled = false;
     }
-})
+});
+
+function addZero(number)
+{
+  return number < 10 ? "0" + number : number;
+}

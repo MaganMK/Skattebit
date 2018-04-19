@@ -2,8 +2,6 @@ export function calculate(year, transactions)
 {
     let groups = groupTransactions(transactions);
     let sortedGroups = sortByDate(groups);
-    console.log("start");
-    console.log(sortedGroups);
 
     let yearBalance = getYearBalance(sortedGroups, year);
     let incomeResults = calculateIncome(sortedGroups, year);
@@ -144,7 +142,6 @@ function calculateUnitPrice(date, currency)
             async: false
         }).responseText;
     let json = JSON.parse(res);
-    console.log(json);
     sleepFor(70);
     return json[currency]["NOK"];
 }
