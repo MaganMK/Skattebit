@@ -13,6 +13,11 @@ var calcBtn = document.getElementById("submit-btn");
 calcBtn.disabled = true;
 txDiv.style.display = "none";
 
+var comingSoon = document.getElementById("komme");
+var comingSoonFile = document.getElementById("kommer");
+comingSoonFile.disabled = true;
+comingSoon.style = "background-color: #f7f7f7; border: solid #dbdbdb;";
+
 function handleInput(event)
 {
     let exchange = event.target.id;
