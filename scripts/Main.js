@@ -3,7 +3,7 @@ import {saveBinanceTransaction} from "./Exchanges/Binance.js";
 import {saveCoinbaseTransaction} from "./Exchanges/Coinbase.js";
 import {calculate} from "./Calculator.js";
 import {saveGdaxTransaction} from "./Exchanges/Gdax.js";
-// import {savePoloniexTransaction} from "./Exchanges/Poloniex.js"
+import {savePoloniexTransaction} from "./Exchanges/Poloniex.js"
 
 let saveCount = 0;
 
@@ -17,6 +17,9 @@ var comingSoon = document.getElementById("komme");
 var comingSoonFile = document.getElementById("kommer");
 comingSoonFile.disabled = true;
 comingSoon.style = "background-color: #f7f7f7; border: solid #dbdbdb;";
+
+var poloniex = document.getElementById("poloniex");
+poloniex.disabled = true;
 
 function handleInput(event)
 {

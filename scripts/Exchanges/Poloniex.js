@@ -30,25 +30,27 @@ export function savePoloniexTransaction(data)
         {
             continue;
         }
-        if (lines == "Exchange")
+        if (lines[2] == "Exchange")
         {
             let currencies = lines[1].split("/");
             let date = new Date(lines[0]);
             let type = lines[3]; //SELL/BUY
+            let buyTransaction;
+            let sellTransaction;
+            //name, quantity, date, isSale, site
             if (type == "BUY")
             {
-                let buyTransaction = new Transaction(currencies[0], lines[5], date, false, "Poloniex");
-                let saleTransaction = new Transaction(currencies[1], lines[6], date, true, "Poloniex");
+                buyTransaction = new Transaction(currencies[0], lines[5], date, false, "Poloniex");
+                sellTransaction = new Transaction(currencies[1], lines[6], date, true, "Poloniex");
             }
             else
             {
-                let buyTransaction = new Transaction(currencies[1], lines[6] , date, false, "Poloniex");
-                let saleTransaction = new Transaction(currencies[0], lines[5], true, "Poloniex");
+                buyTransaction = new Transaction(currencies[1], lines[6] , date, false, "Poloniex");
+                sellTransaction = new Transaction(currencies[0], lines[5], date,  true, "Poloniex");
             }
         transactions.push(sellTransaction);
         transactions.push(buyTransaction);
         }
-    //Transaction: name, quantity, date, isSale, site
     }
     return transactions;
 }
