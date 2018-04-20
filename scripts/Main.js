@@ -2,6 +2,8 @@ import {saveBittrexTransaction} from "./Exchanges/Bittrex.js";
 import {saveBinanceTransaction} from "./Exchanges/Binance.js";
 import {saveCoinbaseTransaction} from "./Exchanges/Coinbase.js";
 import {calculate} from "./Calculator.js";
+import {saveGdaxTransaction} from "./Exchanges/Gdax.js";
+import {savePoloniexTransaction} from "./Exchanges/Poloniex.js"
 
 let saveCount = 0;
 
@@ -62,6 +64,14 @@ function getTransactions(exchange, content)
     else if(exchange == "coinbase")
     {
         return saveCoinbaseTransaction(content);
+    }
+    else if(exchange == "gdax")
+    {
+        return saveGdaxTransaction(content);
+    }
+    else if(exchange == "poloniex")
+    {
+        return savePoloniexTransaction(content);
     }
 }
 
