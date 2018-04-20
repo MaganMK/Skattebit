@@ -25,25 +25,33 @@ export function saveCoinbaseTransaction(data)
     {
         data.splice(-1,1);
     }
+    console.log(data);
     for (let index in data)
     {
         let lines = data[index].split(",");
-        if (isTransaction(lines))
-        {
-            let type = getType(lines[5]);
-            let date = createDate(lines[0]);
-            let currency = lines[3];
-            if (type == "SALE")
+        try{
+            if (isTransaction(lines))
             {
-                let sellTransaction = new Transaction(currency, Math.abs(lines[2]), date, true, "Coinbase");
-                transactions.push(sellTransaction);
-            }
-            else
-            {
-                let buyTransaction = new Transaction(currency, Math.abs(lines[2]), date, false, "Coinbase");
-                transactions.push(buyTransaction);
+                let type = getType(lines[5]);
+                let date = createDate(lines[0]);
+
+                let currency = lines[3];
+                if (type == "SALE")
+                {
+                    let sellTransaction = new Transaction(currency, Math.abs(lines[2]), date, true, "Coinbase");
+                    transactions.push(sellTransaction);
+                }
+                else
+                {
+                    let buyTransaction = new Transaction(currency, Math.abs(lines[2]), date, false, "Coinbase");
+                    transactions.push(buyTransaction);
+                }
             }
         }
+        catch (e) {
+            continue;
+        }
+        
     }
     return transactions;
 }
@@ -70,8 +78,16 @@ function getType(notes)
 //05/06/2017 10:02
 function createDate(dateString)
 {
+    if(dateString.match("-"))
+    {
+        dateString = dateString.substring(5,7)+ "/" + dateString.substring(8,10)  +"/" + dateString.substring(0,4) + " " + dateString.substring(11,19);
+    }
+    else
+    {
+        dateString = dateString.substring(3,5)+ "/" + dateString.substring(0,3)  +"/" + dateString.substring(6,16);
+    }
 
-    dateString = dateString.substring(5,7)+ "/" + dateString.substring(8,10)  +"/" + dateString.substring(0,4) + " " + dateString.substring(11,19);
+
     return new Date(dateString);
 }
 
