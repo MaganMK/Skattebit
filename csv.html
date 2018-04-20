@@ -20,7 +20,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="style.css">
-
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -46,10 +45,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Kalkulator</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="om.html">Om<span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="csv.html">Hva er en csv-fil?<span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
@@ -59,60 +58,45 @@
 </div>
 <div class = "row about" >
     <div class = "col">
-        <h4>Viktig informasjon</h4>
-        <p>Kalkulatoren kan inneholde feil, så det er viktig å se gjennom listen med transaksjoner for å se om det dukker opp noen rare verdier.
-            Hvis du for eksempel oppdager at enhetsprisen på en valuta er 0 betyr det antageligvis at noe er feil.
-            Det kan komme av rebrands, som for eksempel antshares -> NEO (den er håndtert).</p>
-        <p>Gebyrer på transaksjoner blir ikke eksplisitt håndtert. I tillegg kan vi ikke garantere nøyaktigheten til APIet vi henter historiske priser fra.</p>
-        <p><strong>Hvis du oppdager at noe er galt</strong> vil vi gjerne at du sender det til skattebit@gmail.com, slik at vi kan forbedre oss.</p>
+        <h4>Hva er en csv-fil?</h4>
+        <p>En csv-fil (comma-separated values) er en helt vanlig tekstfil hvor hvert felt er adskilt med et komma.
+        Det tekniske rundt en csv-fil trenger du ikke å forstå, men det du trenger å vite er at hver gang du gjør en trade på en exchange, vil den aktuelle traden bli logget av exchangen.
+        Du har muligheten til å <strong>hente ut csv-filer med tradehistorikk fra exchanges</strong> du bruker, som du igjen kan laste opp her for å regne ut skatt og kryptobeholdning.
+            Fremgangsmåten for å hente ut csv-fil er litt ulik for hver exchange, så her kommer det noen bruksanvisninger.</p>
     </div>
 </div>
 <div class = "row about" >
     <div class = "col">
-        <h4>Hvordan bruker jeg kalkulatoren? </h4>
-        <p>Vi har gjort vårt beste for å gjøre kalkulatoren så enkel å bruke som mulig. Her har du en liten oppskrift:</p>
+        <h4>Bittrex</h4>
         <ul>
-            <li>
-                Last ned csv-fil som inneholder alle transaksjonene dine fra exchangene du har brukt for å kjøpe kryptovaluta.
-            </li>
-            <li>
-                Last opp csv-filen til tilhørende knapp. Hvis du har hentet csv-fil fra coinbase skal du trykke på "Coinbase" og dermed laste opp filen.
-                Opplastnings-knappen blir grønn når opplastningen er ferdig (dette kan ta litt tid), og transaksjonene som blir registrert ender opp på bunnen av siden.
-            </li>
-            <li>
-                Last opp flere filer til samme exchange eller til andre exchanges.
-            </li>
-            <li>
-                Velg skatteår, hvis du skal fylle ut skattemelding for 2018 velger du 2017 som skatteår.
-            </li>
-            <li>
-                Trykk på "Regn ut" og vent en stund (Dette kan ta flere minutter hvis du har hundrevis av transaksjoner).
-            </li>
+            <li>Logg inn på Bittrex</li>
+            <li>Trykk på <strong>Orders</strong> øverst i høyre hjørne</li>
+            <li>Trykk på <strong>Download History</strong></li>
+            <li>Trykk på <strong>Download</strong></li>
         </ul>
     </div>
 </div>
-<div class = "row about">
+<div class = "row about" >
     <div class = "col">
-        <h4>Hvordan bruker jeg resultatet? </h4>
-        <p>Vi gir deg tre resultater:</p>
-        <p><strong>Inntekt</strong> <br>Inntekt gir deg gevinst/tap for alle transaksjoner der kalkulatoren har funnet et tidligere kjøp. Da finner kalkulatoren differansen mellom salgsprisen og kjøpsprisen.</p>
-        <p><strong>Inntekt for salg uten kjøp</strong><br>Hvis kalkulatoren finner salg der det ikke er noen tidligere kjøp å matche den med, vil den legge hele verdien av dette salget til i denne blokken.<br>Dette kan komme av at du ikke har lastet opp nok transaksjons-dokumenter, eller at det har skjedd noe galt under utregningen.</p>
-        <p><strong>Balanse</strong><br>Balansen viser totalverdien til kryptobeholdningen din ved årsslutt for dokumentene du har lastet inn.</p>
-        <p>
-            Inntekten føres inn under post 3.1.12 - annen inntekt i skattemeldingen din hvis den er positiv (gevinst), eller post 3.3.7 hvis den er negativ (tap). Balansen føres inn under post 4.5.4 - annen skattepliktig formue i skattemeldingen din.
-        </p>
-
+        <h4>Binance</h4>
+        <ul>
+            <li>Logg inn på Binance</li>
+            <li>Trykk på <strong>Orders</strong> øverst i høyre hjørne og velg trade history</li>
+            <li>Velg tidsrom du vil ha historikk fra. Her kan kun 3 måneder velges om gangen, så du må gjøre det i flere omganger hvis det trengs.</li>
+            <li>Trykk på <strong>Export</strong></li>
+        </ul>
     </div>
 </div>
-<div class = "row about">
+<div class = "row about" >
     <div class = "col">
-        <h4>Hvordan fungerer kalkulatoren? </h4>
+        <h4>Coinbase</h4>
         <ul>
-            <li>Programmet leser filene du sender inn.</li>
-            <li>Alle transaksjoner deles inn i et kjøp og et salg.</li>
-            <li>Vi henter enhetsprisen for valutaene i transaksjonen fra <a href = "https://www.cryptocompare.com/api/#" target="_blank">CryptoCompares</a> API fra datoen transaksjonen ble utført.</li>
-            <li>Vi går gjennom hvert salg og finner et tidligere kjøp (FIFO), og regner ut differansen.</li>
-            <li>Til slutt går vi gjennom hvert salg som ikke har blitt fylt opp av et kjøp, og legger sammen den resterende verdien.</li>
+            <li>Logg inn på Coinbase</li>
+            <li>Trykk på <strong>Tools</strong></li>
+            <li>Trykk på <strong>Reports</strong></li>
+            <li>Velg valuta (eks. BTC), og Time Range: All history</li>
+            <li>Du vil da få csv-fil tilsendt på mail, eller så kan du trykke download.</li>
+            <li>Dette må <strong>gjentas for hver valuta du ønsker historikk for</strong></li>
         </ul>
     </div>
 </div>

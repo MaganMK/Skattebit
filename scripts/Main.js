@@ -18,15 +18,27 @@ var comingSoonFile = document.getElementById("kommer");
 comingSoonFile.disabled = true;
 comingSoon.style = "background-color: #f7f7f7; border: solid #dbdbdb;";
 
-var poloniex = document.getElementById("poloniex");
-//poloniex.disabled = true;
+setGray(selector);
+selector.disabled = true;
+
+function setGreen(element) {
+
+    element.style = "background-color: #c5ffc4; border: solid #78d877;";
+}
+
+function setGray(element) {
+    element.style = "background-color: #f7f7f7; border: solid #dbdbdb;";
+}
+
+function setYellow(element) {
+    element.style = "background-color: #fff87f; border: solid ##e8de3a;";
+}
 
 function handleInput(event)
 {
     let exchange = event.target.id;
     let fileInput = document.getElementById(exchange.substring(0,exchange.length-1));
-    fileInput.style.backgroundColor = "#c6e9ff";
-    fileInput.style.borderColor = "#79ccff";
+    setGreen(fileInput);
     document.body.style.cursor  = 'wait; !important';
     let file = document.getElementById(exchange);
 
@@ -48,6 +60,8 @@ function handleInput(event)
     }
 
     document.body.style.cursor  = 'default';
+    selector.disabled = false;
+    setYellow(selector);
 
 }
 
@@ -192,8 +206,7 @@ function createTable(txs, exchange)
         cell.innerText = i;
     }
 
-    fileInput.style.backgroundColor = "#e0ffd8";
-    fileInput.style.borderColor = "#008927";
+    setGreen(fileInput);
     document.body.style.cursor  = 'default';
 }
 
@@ -201,10 +214,8 @@ selector.addEventListener("change", function() {
     let val = selector.options[selector.selectedIndex].value;
     let validYears = ["2015", "2016", "2017", "2018"];
     if (validYears.indexOf(val) >= 0) {
-        selector.style.backgroundColor = "#c5ffc4";
-        selector.style.border = "solid #78d877";
-        calcBtn.style.backgroundColor = "#c5ffc4";
-        calcBtn.style.border = "solid #78d877";
+        setGreen(selector);
+        setGreen(calcBtn)
         calcBtn.disabled = false;
     }
 });
