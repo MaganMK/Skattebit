@@ -3,7 +3,7 @@ import {saveBinanceTransaction} from "./Exchanges/Binance.js";
 import {saveCoinbaseTransaction} from "./Exchanges/Coinbase.js";
 import {calculate} from "./Calculator.js";
 import {saveGdaxTransaction} from "./Exchanges/Gdax.js";
-import {savePoloniexTransaction} from "./Exchanges/Poloniex.js"
+// import {savePoloniexTransaction} from "./Exchanges/Poloniex.js"
 
 let saveCount = 0;
 
@@ -72,6 +72,7 @@ function getTransactions(exchange, content)
     }
     else if(exchange == "gdax")
     {
+
         return saveGdaxTransaction(content);
     }
     else if(exchange == "poloniex")
@@ -135,6 +136,8 @@ function startCalculation()
 document.getElementById("bittrex").addEventListener("change", handleInput, false);
 document.getElementById("binance").addEventListener("change", handleInput, false);
 document.getElementById("coinbase").addEventListener("change", handleInput, false);
+document.getElementById("gdax").addEventListener("change", handleInput, false);
+document.getElementById("poloniex").addEventListener("change", handleInput, false);
 document.getElementById("submit-btn").addEventListener("click", startCalculation, false);
 
 function getTransactionStrings(txs) {
