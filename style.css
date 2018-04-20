@@ -121,7 +121,6 @@ footer {
 
 #info-wrapper {
     margin-top: 40px;
-    background-color: #c6e9ff;
     margin-bottom: 40px;
     width: 60%;
 }
@@ -153,4 +152,8 @@ th, td {
 
 #file-info {
     margin-bottom: 40px;
+}
+
+#logo {
+    height: 60px;
 }
