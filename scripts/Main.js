@@ -19,7 +19,7 @@ comingSoonFile.disabled = true;
 comingSoon.style = "background-color: #f7f7f7; border: solid #dbdbdb;";
 
 var poloniex = document.getElementById("poloniex");
-poloniex.disabled = true;
+//poloniex.disabled = true;
 
 function handleInput(event)
 {
