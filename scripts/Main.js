@@ -6,6 +6,7 @@ import {saveGdaxTransaction} from "./Exchanges/Gdax.js";
 import {savePoloniexTransaction} from "./Exchanges/Poloniex.js"
 
 let saveCount = 0;
+let fileCount = 0;
 
 var txDiv = document.getElementById("tx-table-div");
 var selector = document.getElementById("year-selector");
@@ -36,6 +37,7 @@ function setYellow(element) {
 
 function handleInput(event)
 {
+    fileCount++;
     let exchange = event.target.id;
     let fileInput = document.getElementById(exchange.substring(0,exchange.length-1));
     setGreen(fileInput);
@@ -61,7 +63,9 @@ function handleInput(event)
 
     document.body.style.cursor  = 'default';
     selector.disabled = false;
-    setYellow(selector);
+    if (fileCount == 1){
+        setYellow(selector);
+    }
 
 }
 
