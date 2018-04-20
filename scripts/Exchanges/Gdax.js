@@ -8,7 +8,6 @@ export function saveGdaxTransaction(data)
     let transactions = [];
     data = data.split("\n");
     data = data.slice(1);
-    console.log(data);
 
     while (data[data.length-1].length == 0)
     {
@@ -20,27 +19,53 @@ export function saveGdaxTransaction(data)
     {
         let lines = data[index].split(",");
         try{
-                console.log(lines);
                 let type = lines[2];
                 let date = createDate(lines[3]);
-                let currencies = line[1].split("-");
+                let currencies = lines[1].split("-");
 
                 let buyTransaction;
                 let sellTransaction;
 
-                if(type == "SELL")
+            if(type == "SELL")
                 {
-                    sellTransaction = new Transaction(currencies[0], line[4], date, true, "Gdax");
-                    try
+
+                    sellTransaction = new Transaction(currencies[0], lines[4], date, true, "Gdax");
+
+                    if(currencies[1] == "EUR" || currencies[1] == "USD" || currencies[1] == "GBP")
                     {
-                        buyTransaction = new Transaction(currencies[1], line[8], date, false, "Gdax");
+
                     }
-                    catch (e) {}
+                    else
+                    {
+                        buyTransaction = new Transaction(currencies[1], lines[7], date, false, "Gdax");
+                    }
+
                 }
                 else
                 {
+                    buyTransaction = new Transaction(currencies[0], lines[4], date, false, "Gdax");
 
+                    if(currencies[1] == "EUR" || currencies[1] == "USD" || currencies[1] == "GBP")
+                    {
+
+                    }
+                    else
+                    {
+                        sellTransaction = new Transaction(currencies[1], lines[7], date, false, "Gdax");
+
+                    }
                 }
+
+                if(sellTransaction !=  null)
+                {
+                    transactions.push(sellTransaction);
+                }
+
+                if(buyTransaction != null)
+                {
+                    transactions.push(buyTransaction);
+                }
+
 
 
         }
