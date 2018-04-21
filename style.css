@@ -29,6 +29,7 @@ label {
     margin-right: 10px;
     font-size: 20px;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
 }
 
 label:hover {
@@ -165,8 +166,8 @@ th, td {
     border: 0px;
     height: 40px;
     width: 40px;
-    bottom: 53px;
-    right: 70px;
+    bottom: 4px;
+    right: 4px;
     position: absolute;
     transition-duration: 0.5s;
 
