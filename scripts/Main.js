@@ -166,6 +166,7 @@ document.getElementById("gdax").addEventListener("change", handleInput, false);
 document.getElementById("poloniex").addEventListener("change", handleInput, false);
 document.getElementById("generic").addEventListener("change", handleInput, false);
 document.getElementById("submit-btn").addEventListener("click", startCalculation, false);
+document.getElementById("generic-info").addEventListener("click", popupInfo, false);
 
 function getTransactionStrings(txs) {
     let res = [];
@@ -233,4 +234,16 @@ selector.addEventListener("change", function() {
 function addZero(number)
 {
   return number < 10 ? "0" + number : number;
+}
+
+function popupInfo() {
+    let info = "Her kan du laste opp en csv-fil du har laget selv. Den kan for eksempel lages i excel, så lenge lagrer som csv." + "\n";
+    info += "Det er viktig at filen er formatert slik at øverste linje inneholder disse felt-overskriftene:" + "\n";
+    info += "Tidspunkt, Valuta, Mengde, Type, Marked" + "\n";
+    info += "Deretter er det bare å fylle ut kjøp og salg under riktig kolonne." + "\n";
+    info += "Eksempel:" + "\n";
+    info += "Tidspunkt, Valuta, Mengde, Type, Marked" + "\n";
+    info += "21/04/2018 13:55, BTC, 2, Kjop, Bittrex" + "\n";
+    info += "22/04/2018 12:00, ETH, 3, Salg, Binance";
+    alert(info);
 }

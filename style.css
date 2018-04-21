@@ -157,3 +157,24 @@ th, td {
 #logo {
     height: 60px;
 }
+
+#generic-info
+{
+    border-radius: 5px;
+    background-color: white;
+    border: 0px;
+    height: 40px;
+    width: 40px;
+    bottom: 53px;
+    right: 70px;
+    position: absolute;
+    transition-duration: 0.5s;
+
+}
+
+#generic-info:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #c6e9ff;
+
+}
