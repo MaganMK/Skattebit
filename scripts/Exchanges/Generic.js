@@ -33,7 +33,7 @@ export function saveGenericTransaction(data)
         let type = lines[pointers["type"]].toLowerCase();
         //let market = lines[pointers["marked"]];
         //market = (market.length == 0 ? "generisk" : market);
-        let market = "Generisk";
+        let market = "Egendefinert";
         let date = createDate(lines[pointers["tidspunkt"]]);
         let tx;
         if (type == "kjop" || type == "kjopt" || type == "buy" || type == "bought")
