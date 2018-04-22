@@ -34,7 +34,7 @@ function setGray(element) {
 }
 
 function setYellow(element) {
-    element.style = "background-color: #fff87f; border: solid ##e8de3a;";
+    element.style = "background-color: #fffb99; border: solid ##e8de3a;";
 }
 
 function handleInput(event)
