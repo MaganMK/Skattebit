@@ -67,7 +67,7 @@ function calculateIncome(mainGroups, year)
                 let currentBuy = groups[key]["buys"][buyKey];
                 if (currentSale.quantity > 0)
                 {
-                    if (new Date(currentBuy.date).getTime() <= new Date(currentSale.date).getTime())
+                    if (new Date(currentBuy.date).getTime() < new Date(currentSale.date).getTime())
                     {
                         if (currentBuy.quantity >= currentSale.quantity)
                         {

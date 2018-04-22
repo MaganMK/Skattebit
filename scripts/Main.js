@@ -9,6 +9,7 @@ import {saveGenericTransaction} from "./Exchanges/Generic.js"
 let saveCount = 0;
 let fileCount = 0;
 
+
 var txDiv = document.getElementById("tx-table-div");
 var selector = document.getElementById("year-selector");
 var calcBtn = document.getElementById("submit-btn");
@@ -166,7 +167,6 @@ document.getElementById("gdax").addEventListener("change", handleInput, false);
 document.getElementById("poloniex").addEventListener("change", handleInput, false);
 document.getElementById("generic").addEventListener("change", handleInput, false);
 document.getElementById("submit-btn").addEventListener("click", startCalculation, false);
-document.getElementById("generic-info").addEventListener("click", popupInfo, false);
 
 function getTransactionStrings(txs) {
     let res = [];
@@ -236,14 +236,16 @@ function addZero(number)
   return number < 10 ? "0" + number : number;
 }
 
-function popupInfo() {
-    let info = "Her kan du laste opp en csv-fil du har laget selv. Den kan for eksempel lages i excel, så lenge lagrer som csv." + "\n";
-    info += "Det er viktig at filen er formatert slik at øverste linje inneholder disse felt-overskriftene:" + "\n";
-    info += "Tidspunkt, Valuta, Mengde, Type, Marked" + "\n";
-    info += "Deretter er det bare å fylle ut kjøp og salg under riktig kolonne." + "\n";
-    info += "Eksempel:" + "\n";
-    info += "Tidspunkt, Valuta, Mengde, Type, Marked" + "\n";
-    info += "21/04/2018 13:55, BTC, 2, Kjop, Bittrex" + "\n";
-    info += "22/04/2018 12:00, ETH, 3, Salg, Binance";
-    alert(info);
-}
+
+$('#generic-info').click(function (e) {
+    e.preventDefault();
+    let info = "Her kan du laste opp en csv-fil du har laget selv. Den kan for eksempel lages i excel, så lenge den lagres som csv." + "<br>";
+    info += "Det er viktig at filen er formatert slik at øverste linje inneholder disse felt-overskriftene:" + "<br>";
+    info += "<strong>Tidspunkt, Valuta, Mengde, Type, Marked</strong>" + "<br><br>";
+    info += "Tidspunkt skrives på formen dd/mm/åååå tt:mm. Valuta skal bestå av 3 bokstaver (eks: BTC). Mengdetall adskilles med '.'. Type skrives som 'kjop' eller 'salg'." + "<br><br>";
+    info += "<strong>Eksempel:</strong>" + "<br>";
+    info += "Tidspunkt, Valuta, Mengde, Type, Marked" + "<br>";
+    info += "21/04/2018 13:55, BTC, 2.3, Kjop, Bittrex" + "<br>";
+    info += "22/04/2018 12:00, ETH, 3.1, Salg, Binance";
+    bootbox.alert(info);
+});

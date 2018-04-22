@@ -18,6 +18,12 @@ export function saveGenericTransaction(data)
     {
         data.splice(-1,1);
     }
+
+    while (data[data.length-1].split(",")[0].length == 0)
+    {
+        data.splice(-1,1);
+    }
+
     for (let index in data)
     {
         let lines = data[index].split(",");
