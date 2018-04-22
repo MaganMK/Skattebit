@@ -5,12 +5,13 @@ export function saveGenericTransaction(data)
 {
     let transactions = [];
     data = data.split("\n");
-    let firstLine = data[0].split(",").concat("hei");
+    let firstLine = data[0].split(",");
     data = data.slice(1);
 
     let pointers = {};
     for (let i in firstLine) {
         let val = firstLine[i].toLowerCase();
+        val = val.split(' ').join('');
         pointers[val] = i;
 
     }
@@ -27,6 +28,21 @@ export function saveGenericTransaction(data)
     for (let index in data)
     {
         let lines = data[index].split(",");
+        for (let i in lines)
+        {
+            if (i != pointers["tidspunkt"])
+            {
+                lines[i] = lines[i].split(' ').join('');
+            }
+            else
+            {
+                if (lines[i][0] == " ")
+                {
+                     lines[i] = lines[i].substring(1);
+                }
+            }
+
+        }
 
         let name = lines[pointers["valuta"]];
         let qty = lines[pointers["mengde"]];

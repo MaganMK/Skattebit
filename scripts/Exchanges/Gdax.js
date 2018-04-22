@@ -13,8 +13,6 @@ export function saveGdaxTransaction(data)
     {
         data.splice(-1,1);
     }
-
-
     for (let index in data)
     {
         let lines = data[index].split(",");
