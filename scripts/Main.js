@@ -38,7 +38,6 @@ function setGray(element) {
 
 function setYellow(element) {
     element.style = "background-color: #fffb99; border: solid ##e8de3a;";
-    loading.style = "color: white;";
 }
 
 function handleInput(event)
@@ -72,6 +71,7 @@ function handleInput(event)
         }
 
         document.body.style.cursor  = 'default';
+        loading.style.visibility = "hidden";
         selector.disabled = false;
         if (fileCount == 1){
 
