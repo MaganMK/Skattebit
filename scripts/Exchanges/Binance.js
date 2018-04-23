@@ -19,6 +19,7 @@ export function saveBinanceTransaction(data)
     }
     for (let index in data)
     {
+
         let lines = data[index].split(",");
         let type = lines[2];
         let currencies = getTradingPair(lines[1]);
@@ -38,6 +39,7 @@ export function saveBinanceTransaction(data)
         transactions.push(sellTransaction);
         transactions.push(buyTransaction);
     }
+
     return transactions;
 }
 

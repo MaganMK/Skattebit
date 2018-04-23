@@ -24,6 +24,9 @@ comingSoon.style = "background-color: #f7f7f7; border: solid #dbdbdb;";
 setGray(selector);
 selector.disabled = true;
 
+var loading = document.getElementById("loadingWrapper");
+loading.style.visibility = "hidden";
+
 function setGreen(element) {
 
     element.style = "background-color: #c5ffc4; border: solid #78d877;";
@@ -35,39 +38,47 @@ function setGray(element) {
 
 function setYellow(element) {
     element.style = "background-color: #fffb99; border: solid ##e8de3a;";
+    loading.style = "color: white;";
 }
 
 function handleInput(event)
 {
-    fileCount++;
-    let exchange = event.target.id;
-    let fileInput = document.getElementById(exchange.substring(0,exchange.length-1));
-    setGreen(fileInput);
-    document.body.style.cursor  = 'wait; !important';
-    let file = document.getElementById(exchange);
+    loading.style.visibility = "visible";
 
-    if(file.files.length)
-    {
-        let reader = new FileReader();
+    setTimeout(function () {
+        fileCount++;
 
-        reader.onload= function(e)
+        let exchange = event.target.id;
+        let fileInput = document.getElementById(exchange.substring(0,exchange.length-1));
+        setGreen(fileInput);
+        document.body.style.cursor  = 'wait; !important';
+        let file = document.getElementById(exchange);
+
+        if(file.files.length)
         {
-            let content = e.target.result;
-            let transactions = getTransactions(exchange, content);
-            sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
-            let txs = getAllTransactions();
-            createTable(txs, exchange);
-        };
+            let reader = new FileReader();
 
-        reader.readAsBinaryString(file.files[0]);
+            reader.onload= function(e)
+            {
+                let content = e.target.result;
+                let transactions = getTransactions(exchange, content);
+                sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
+                let txs = getAllTransactions();
+                createTable(txs, exchange);
+            };
 
-    }
+            reader.readAsBinaryString(file.files[0]);
 
-    document.body.style.cursor  = 'default';
-    selector.disabled = false;
-    if (fileCount == 1){
-        setYellow(selector);
-    }
+        }
+
+        document.body.style.cursor  = 'default';
+        selector.disabled = false;
+        if (fileCount == 1){
+
+            setYellow(selector);
+        }
+    }, 5);
+
 
 }
 
@@ -249,3 +260,8 @@ $('#generic-info').click(function (e) {
     info += "22/04/2018 12:00, ETH, 3.1, Salg, Binance";
     bootbox.alert(info);
 });
+
+function sleepFor( sleepDuration ){
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
+}

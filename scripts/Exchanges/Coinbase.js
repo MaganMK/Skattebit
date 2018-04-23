@@ -1,5 +1,6 @@
 import {Transaction} from "../Transaction.js";
 
+
 export function saveCoinbaseTransaction(data)
 {
     //0 date = 05/06/2017 10:02
@@ -25,7 +26,12 @@ export function saveCoinbaseTransaction(data)
     {
         data.splice(-1,1);
     }
-    console.log(data);
+    /*
+    let index = 0;
+    setTimeout(function () {
+
+    },100);
+    */
     for (let index in data)
     {
         let lines = data[index].split(",");
@@ -51,8 +57,9 @@ export function saveCoinbaseTransaction(data)
         catch (e) {
             continue;
         }
-        
+
     }
+
     return transactions;
 }
 

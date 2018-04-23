@@ -10,8 +10,9 @@ export class Transaction {
     this.totalPrice = this.quantity * this.unitPrice;
     this.site = site;
     this.representation = this.toString();
-    sleepFor(70);
 
+
+    sleepFor(70);
   }
 
   toString() {
@@ -60,7 +61,7 @@ function calculateUnitPrice(tx)
 }
 
 function fixName(name) {
-    let fixes = {"ANS": "NEO", "BCC": "BCH"}
+    let fixes = {"ANS": "NEO", "BCC": "BCH"};
     if (name in fixes)
     {
         return fixes[name]
@@ -72,3 +73,5 @@ function sleepFor( sleepDuration ){
     var now = new Date().getTime();
     while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
 }
+
+

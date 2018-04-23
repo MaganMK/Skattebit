@@ -6,6 +6,7 @@ import {Transaction} from "../Transaction.js";
 
 
 
+
 // 0 --> id = 8a9bf807 - f899 - 4c07 - 95b8 - 9d312ef1e192
 // 1 --> exchange = BTC - ADA
 // 2 --> type = LIMIT_SELL
@@ -29,6 +30,7 @@ export function saveBittrexTransaction(data)
         let line = data[index].split(",");
         let type = line[2];
         let currencies = line[1].split("-");
+
         let date = createDate(line[8]); // TODO: Denne  å vi fikse
 
         let buyTransaction;
@@ -55,5 +57,11 @@ function createDate(dateString)
 {
     return new Date(dateString);
 }
+
+function sleepFor( sleepDuration ){
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
+}
+
 
 
