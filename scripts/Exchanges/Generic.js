@@ -1,7 +1,5 @@
 import {Transaction} from "../Transaction.js";
 
-var loading = document.getElementById("loadingWrapper");
-
 //Må inneholde Tidspunkt (dd/mm/yyyy evt hh:mm:ss)	Valuta	Mengde	Type	Marked
 export function saveGenericTransaction(data)
 {
