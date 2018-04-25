@@ -26,7 +26,7 @@ export function savePoloniexTransaction(data)
     for (let index in data)
     {
         let lines = data[index].split(",");
-        if (lines.length == 0)
+        if (lines[0].length == 0)
         {
             continue;
         }
