@@ -28,6 +28,10 @@ export function saveBittrexTransaction(data)
     for (let index in data)
     {
         let line = data[index].split(",");
+        if (line[0].length == 0)
+        {
+            continue;
+        }
         let type = line[2];
         let currencies = line[1].split("-");
 

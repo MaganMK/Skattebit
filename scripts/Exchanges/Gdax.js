@@ -16,6 +16,10 @@ export function saveGdaxTransaction(data)
     for (let index in data)
     {
         let lines = data[index].split(",");
+        if (lines[0].length == 0)
+        {
+            continue;
+        }
         try{
                 let type = lines[2];
                 let date = createDate(lines[3]);
