@@ -56,17 +56,25 @@ function handleInput(event)
         if(file.files.length)
         {
             let reader = new FileReader();
-
+            reader.readAsText(file.files[0], "utf-8");
             reader.onload= function(e)
             {
+            try {
                 let content = e.target.result;
                 let transactions = getTransactions(exchange, content);
                 sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
                 let txs = getAllTransactions();
                 createTable(txs, exchange);
+            } catch (err) //Catcher om filen er encodet i utf16
+            {
+                reader.readAsText(file.files[0], "utf-16");
+                let content = e.target.result;
+                let transactions = getTransactions(exchange, content);
+                sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
+                let txs = getAllTransactions();
+                createTable(txs, exchange);
+            }
             };
-
-            reader.readAsBinaryString(file.files[0]);
 
         }
 
