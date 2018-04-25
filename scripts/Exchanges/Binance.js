@@ -19,10 +19,22 @@ export function saveBinanceTransaction(data)
     }
     for (let index in data)
     {
+        let lines = [];
 
-        let lines = data[index].split(",");
+        if(data[index].match(";"))
+        {
+
+            lines = data[index].split(";");
+        }
+        else
+        {
+            lines = data[index].split(",");
+        }
+
+
         let type = lines[2];
         let currencies = getTradingPair(lines[1]);
+        console.log(currencies);
         let date = createDate(lines[0]);
         let buyTransaction;
         let sellTransaction;
@@ -36,6 +48,8 @@ export function saveBinanceTransaction(data)
             buyTransaction = new Transaction(currencies[0], lines[4], date, false, "Binance");
             sellTransaction = new Transaction(currencies[1], lines[5], date, true, "Binance");
         }
+        console.log(buyTransaction);
+        console.log(sellTransaction);
         transactions.push(sellTransaction);
         transactions.push(buyTransaction);
     }
@@ -48,7 +62,7 @@ function getTradingPair(line)
     let result = [];
     if (line.length == 7)
     {
-        result.push(line.substring(0,3))
+        result.push(line.substring(0,4));
         result.push(line.substring(4,line.length));
     }
     else
