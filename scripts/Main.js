@@ -245,6 +245,11 @@ function createTable(txs, exchange)
         for(let i = 0; i < lines.length; i++)
         {
             let cell = row.insertCell(i);
+            if(lines[i] == "IOT")
+            {
+                lines[i] = "IOTA";
+                console.log(lines[i]);
+            }
             cell.innerText = lines[i];
         }
         let cell = row.insertCell(0);

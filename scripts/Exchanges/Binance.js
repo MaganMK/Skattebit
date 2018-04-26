@@ -38,11 +38,20 @@ export function saveBinanceTransaction(data)
 
         let type = lines[2];
         let currencies = getTradingPair(lines[1]);
+        if(currencies[0] == "IOTA")
+        {
+            currencies[0] = "IOT";
+        }
+        if(currencies[1] == "IOTA")
+        {
+            currencies[1] = "IOT";
+        }
         let date = createDate(lines[0]);
         let buyTransaction;
         let sellTransaction;
         if (type == "SELL")
         {
+
             sellTransaction = new Transaction(currencies[0], lines[4], date, true, "Binance");
             buyTransaction = new Transaction(currencies[1], lines[5], date, false, "Binance");
         }
