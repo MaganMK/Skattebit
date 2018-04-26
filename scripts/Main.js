@@ -5,6 +5,7 @@ import {calculate} from "./Calculator.js";
 import {saveGdaxTransaction} from "./Exchanges/Gdax.js";
 import {savePoloniexTransaction} from "./Exchanges/Poloniex.js"
 import {saveGenericTransaction} from "./Exchanges/Generic.js"
+import {saveKrakenTransaction} from "./Exchanges/Kraken.js";
 
 let saveCount = 0;
 let fileCount = 0;
@@ -19,7 +20,7 @@ txDiv.style.display = "none";
 var comingSoon = document.getElementById("komme");
 var comingSoonFile = document.getElementById("kommer");
 comingSoonFile.disabled = true;
-comingSoon.style = "background-color: #f7f7f7; border: solid #dbdbdb;";
+comingSoon.style = "background-color: #f7f7f7; border: solid #dbdbdb; opacity: 0.65;";
 
 setGray(selector);
 selector.disabled = true;
@@ -47,41 +48,50 @@ function handleInput(event)
     setTimeout(function () {
         fileCount++;
 
+
+
         let exchange = event.target.id;
         let fileInput = document.getElementById(exchange.substring(0,exchange.length-1));
-        setGreen(fileInput);
         document.body.style.cursor  = 'wait; !important';
         let file = document.getElementById(exchange);
 
         if(file.files.length)
         {
             let reader = new FileReader();
+
+
             reader.readAsText(file.files[0], "utf-8");
-            reader.onload= function(e)
+
+
+            reader.onload = function(e)
             {
-            try {
-                let content = e.target.result;
-                let transactions = getTransactions(exchange, content);
-                sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
-                let txs = getAllTransactions();
-                createTable(txs, exchange);
-            } catch (err) //Catcher om filen er encodet i utf16
-            {
-                reader.readAsText(file.files[0], "utf-16");
-                let content = e.target.result;
-                let transactions = getTransactions(exchange, content);
-                sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
-                let txs = getAllTransactions();
-                createTable(txs, exchange);
-            }
+
+                try {
+                    let content = e.target.result;
+                    let transactions = getTransactions(exchange, content);
+                    sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
+                    let txs = getAllTransactions();
+                    createTable(txs, exchange);
+                } catch (err) //Catcher om filen er encodet i utf16
+                {
+                    return;
+                    /* Dette må løses på en annen måte, nå ender man i en evig loop om man kommer ned hit
+                    reader.readAsText(file.files[0], "utf-16");
+                    let content = e.target.result;
+                    let transactions = getTransactions(exchange, content);
+                    sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
+                    let txs = getAllTransactions();
+                    createTable(txs, exchange);
+                    */
+                }
             };
 
         }
-
         document.body.style.cursor  = 'default';
         loading.style.visibility = "hidden";
         selector.disabled = false;
         if (fileCount == 1){
+
 
             setYellow(selector);
         }
@@ -124,6 +134,10 @@ function getTransactions(exchange, content)
     else if(exchange == "generic")
     {
         return saveGenericTransaction(content);
+    }
+    else if(exchange == "kraken")
+    {
+        return saveKrakenTransaction(content);
     }
 }
 
@@ -180,6 +194,7 @@ function startCalculation()
 }
 
 document.getElementById("bittrex").addEventListener("change", handleInput, false);
+document.getElementById("kraken").addEventListener("change", handleInput, false);
 document.getElementById("binance").addEventListener("change", handleInput, false);
 document.getElementById("coinbase").addEventListener("change", handleInput, false);
 document.getElementById("gdax").addEventListener("change", handleInput, false);
