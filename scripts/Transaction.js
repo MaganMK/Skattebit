@@ -45,9 +45,16 @@ export class Transaction {
 
 function calculateUnitPrice(tx)
 {
+    let name = tx.name;
+
+    if(tx.name == "IOTA")
+    {
+        name = "IOT";
+    }
+    
     let timestamp = new Date(tx.date).getTime()/1000;
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="
-        + tx.name + "&tsyms=" + "NOK" + "&ts=" + timestamp;
+        + name + "&tsyms=" + "NOK" + "&ts=" + timestamp;
     let res = $.ajax({
         type: "GET",
         url: url,
@@ -55,7 +62,7 @@ function calculateUnitPrice(tx)
         async: false
     }).responseText;
     let json = JSON.parse(res);
-    return json[tx.name]["NOK"];
+    return json[name]["NOK"];
 }
 
 function fixName(name) {

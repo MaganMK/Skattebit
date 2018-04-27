@@ -38,14 +38,6 @@ export function saveBinanceTransaction(data)
 
         let type = lines[2];
         let currencies = getTradingPair(lines[1]);
-        if(currencies[0] == "IOTA")
-        {
-            currencies[0] = "IOT";
-        }
-        if(currencies[1] == "IOTA")
-        {
-            currencies[1] = "IOT";
-        }
         let date = createDate(lines[0]);
         let buyTransaction;
         let sellTransaction;
@@ -63,6 +55,7 @@ export function saveBinanceTransaction(data)
 
         transactions.push(sellTransaction);
         transactions.push(buyTransaction);
+
     }
 
     return transactions;
