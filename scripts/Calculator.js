@@ -82,10 +82,13 @@ function calculateIncome(mainGroups, year)
                             currentBuy.quantity = 0;
                         }
                     }
+
                 }
+
             }
             if (new Date(currentSale.date).getFullYear() == year)
             {
+
                 filled += profit;
                 unfilled += currentSale.quantity * currentSale.unitPrice;
                 currentSale.quantity = 0

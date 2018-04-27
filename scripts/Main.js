@@ -6,6 +6,7 @@ import {saveGdaxTransaction} from "./Exchanges/Gdax.js";
 import {savePoloniexTransaction} from "./Exchanges/Poloniex.js"
 import {saveGenericTransaction} from "./Exchanges/Generic.js"
 import {saveKrakenTransaction} from "./Exchanges/Kraken.js";
+import {saveBitfinexTransaction} from "./Exchanges/Bitfinex.js";
 
 let saveCount = 0;
 let fileCount = 0;
@@ -139,6 +140,10 @@ function getTransactions(exchange, content)
     {
         return saveKrakenTransaction(content);
     }
+    else if(exchange == "bitfinex")
+    {
+        return saveBitfinexTransaction(content);
+    }
 }
 
 
@@ -196,6 +201,7 @@ function startCalculation()
 document.getElementById("bittrex").addEventListener("change", handleInput, false);
 document.getElementById("kraken").addEventListener("change", handleInput, false);
 document.getElementById("binance").addEventListener("change", handleInput, false);
+document.getElementById("bitfinex").addEventListener("change", handleInput, false);
 document.getElementById("coinbase").addEventListener("change", handleInput, false);
 document.getElementById("gdax").addEventListener("change", handleInput, false);
 document.getElementById("poloniex").addEventListener("change", handleInput, false);
