@@ -1,5 +1,8 @@
+var globalCounter = 0;
+
 export class Transaction {
     constructor(name, quantity, date, isSale, site) {
+        globalCounter++;
         this.name = fixName(name);
         this.quantity = quantity;
         this.isSale = isSale;
@@ -10,7 +13,17 @@ export class Transaction {
         this.representation = this.toString();
 
 
-        sleepFor(70);
+        if(globalCounter >= 280)
+        {
+            sleepFor(350); // Må senke raten betraktelig for å ikke gå over "300 uthentinger pr min"-grensen til apiet
+        }
+        else
+        {
+            sleepFor(70);
+        }
+        console.log(this);
+        console.log(globalCounter);
+
     }
 
     toString() {
@@ -51,7 +64,7 @@ function calculateUnitPrice(tx)
     {
         name = "IOT";
     }
-    
+
     let timestamp = new Date(tx.date).getTime()/1000;
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="
         + name + "&tsyms=" + "NOK" + "&ts=" + timestamp;

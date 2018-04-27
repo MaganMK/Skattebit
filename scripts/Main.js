@@ -245,11 +245,6 @@ function createTable(txs, exchange)
         for(let i = 0; i < lines.length; i++)
         {
             let cell = row.insertCell(i);
-            if(lines[i] == "IOT")
-            {
-                lines[i] = "IOTA";
-                console.log(lines[i]);
-            }
             cell.innerText = lines[i];
         }
         let cell = row.insertCell(0);
@@ -265,7 +260,7 @@ selector.addEventListener("change", function() {
     let validYears = ["2015", "2016", "2017", "2018"];
     if (validYears.indexOf(val) >= 0) {
         setGreen(selector);
-        setGreen(calcBtn)
+        setGreen(calcBtn);
         calcBtn.disabled = false;
     }
 });

@@ -5,7 +5,16 @@ export function saveGenericTransaction(data)
 {
     let transactions = [];
     data = data.split("\n");
-    let firstLine = data[0].split(",");
+    let firstLine;
+    if(data[0].match(";"))
+    {
+        firstLine = data[0].split(";");
+    }
+    else
+    {
+        firstLine = data[0].split(",");
+    }
+
     data = data.slice(1);
 
     let pointers = {};
@@ -20,14 +29,25 @@ export function saveGenericTransaction(data)
         data.splice(-1,1);
     }
 
+
+
     while (data[data.length-1].split(",")[0].length == 0)
     {
         data.splice(-1,1);
     }
 
+
     for (let index in data)
     {
-        let lines = data[index].split(",");
+        let lines;
+        if(data[index].match(";"))
+        {
+            lines = data[index].split(";");
+        }
+        else
+        {
+            lines = data[index].split(",");
+        }
         for (let i in lines)
         {
             if (i != pointers["tidspunkt"])
@@ -38,7 +58,7 @@ export function saveGenericTransaction(data)
             {
                 if (lines[i][0] == " ")
                 {
-                     lines[i] = lines[i].substring(1);
+                    lines[i] = lines[i].substring(1);
                 }
             }
 
@@ -70,4 +90,9 @@ function createDate(dateString)
 {
     dateString = dateString.substring(3,5) + "/" + dateString.substring(0,2) + "/" + dateString.substring(6,dateString.length);
     return new Date(dateString);
+}
+
+function sleepFor( sleepDuration ){
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
 }
