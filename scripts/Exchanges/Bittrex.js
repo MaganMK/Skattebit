@@ -27,11 +27,24 @@ export function saveBittrexTransaction(data)
     }
     for (let index in data)
     {
-        let line = data[index].split(",");
+        let line;
+        if(data[index].includes(";"))
+        {
+            line = data[index].split(";")
+        }
+        else
+        {
+            line = data[index].split(",");
+        }
         if (line[0].length == 0)
         {
             continue;
         }
+        if(line.length == 1)
+        {
+            continue;
+        }
+        console.log(line);
         let type = line[2];
         let currencies = line[1].split("-");
 
@@ -39,8 +52,12 @@ export function saveBittrexTransaction(data)
 
         let buyTransaction;
         let sellTransaction;
+        console.log(date);
+        console.log(type);
+        console.log(currencies);
         if(type == "LIMIT_SELL")
         {
+            console.log(type);
             buyTransaction = new Transaction(currencies[0], line[6], date, false, "Bittrex");
             sellTransaction = new Transaction(currencies[1], line[3], date, true, "Bittrex");
         }
@@ -48,6 +65,8 @@ export function saveBittrexTransaction(data)
             sellTransaction = new Transaction(currencies[0], line[6], date, true, "Bittrex");
             buyTransaction = new Transaction(currencies[1], line[3], date, false, "Bittrex");
         }
+        console.log(sellTransaction);
+        console.log(buyTransaction);
         transactions.push(sellTransaction);
         transactions.push(buyTransaction);
     }
@@ -59,6 +78,8 @@ export function saveBittrexTransaction(data)
 // TODO: se på denne
 function createDate(dateString)
 {
+    console.log(dateString);
+
     return new Date(dateString);
 }
 
