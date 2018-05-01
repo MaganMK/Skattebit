@@ -64,6 +64,12 @@ function calculateUnitPrice(tx)
     {
         name = "IOT";
     }
+    else if(tx.name == "XBT")
+    {
+        name = "BTC";
+    }
+
+    console.log(name);
 
     let timestamp = new Date(tx.date).getTime()/1000;
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="

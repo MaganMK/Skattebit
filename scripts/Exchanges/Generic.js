@@ -48,6 +48,7 @@ export function saveGenericTransaction(data)
         {
             lines = data[index].split(",");
         }
+
         for (let i in lines)
         {
             if (i != pointers["tidspunkt"])
@@ -63,6 +64,8 @@ export function saveGenericTransaction(data)
             }
 
         }
+
+        console.log(lines);
 
         let name = lines[pointers["valuta"]];
         let qty = lines[pointers["mengde"]];

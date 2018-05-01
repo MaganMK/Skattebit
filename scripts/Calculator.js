@@ -134,9 +134,21 @@ function getYearBalance(groups, year)
 
 function calculateUnitPrice(date, currency)
 {
+    let name = currency;
+
+    if(currency == "IOTA")
+    {
+        name = "IOT";
+    }
+    else if(currency == "XBT")
+    {
+        name = "BTC";
+    }
+
+
     let timestamp = date.getTime()/1000;
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="
-    + currency + "&tsyms=" + "NOK" + "&ts=" + timestamp;
+    + name + "&tsyms=" + "NOK" + "&ts=" + timestamp;
     let res = $.ajax({
             type: "GET",
             url: url,
@@ -145,7 +157,7 @@ function calculateUnitPrice(date, currency)
         }).responseText;
     let json = JSON.parse(res);
     sleepFor(70);
-    return json[currency]["NOK"];
+    return json[name]["NOK"];
 }
 
 function sleepFor( sleepDuration ){

@@ -16,24 +16,46 @@ export function saveKrakenTransaction(data)
     for (let index in data) {
         let lines = [];
 
-        lines = data[index].split(",");
+        if (data[index].includes(";"))
+        {
+            lines = data[index].split(";");
+        }
+        else
+        {
+            lines = data[index].split(",");
+        }
+
 
         if (lines.length == 1)
         {
             continue;
         }
 
+        console.log(lines);
         let type = lines[3];
-        type = type.replace("\"", '');
-        type = type.replace("\"", '');
-        type = type.replace("\"", '');
-        type = type.replace("\"", '');
+        if(type.includes("\""))
+        {
+            type = type.replace("\"", '');
+            type = type.replace("\"", '');
+            type = type.replace("\"", '');
+            type = type.replace("\"", '');
+        }
+
 
         let currencie = lines[5];
-        currencie = currencie.substring(3, currencie.length);
 
-        currencie = currencie.replace("\"", '');
-        currencie = currencie.replace("\"", '');
+
+        if(currencie.includes("\""))
+        {
+            currencie = currencie.substring(3, currencie.length);
+            currencie = currencie.replace("\"", '');
+            currencie = currencie.replace("\"", '');
+        }
+        else if(currencie != "BCH"){
+            currencie = currencie.substring(1, currencie.length);
+        }
+
+
 
         if(currencie == "EUR" || currencie == "USD" || currencie == "GBP")
         {
@@ -42,6 +64,7 @@ export function saveKrakenTransaction(data)
 
         let amount = lines[6];
         let date = createDate(lines[2]);
+
 
         let transaction;
 
@@ -63,7 +86,6 @@ export function saveKrakenTransaction(data)
         {
             transaction = new Transaction(currencie, -amount, date, true, "Kraken");
         }
-
         transactions.push(transaction);
 
     }
@@ -73,7 +95,11 @@ export function saveKrakenTransaction(data)
 
 function createDate(dateString)
 {
-    dateString = dateString.substring(2,21);
-    dateString = dateString.substring(5,7) + "/" + dateString.substring(8,10) + "/" + dateString.substring(0,4) + " " + dateString.substring(11,16)
+    if(dateString.includes("\""))
+    {
+        dateString = dateString.substring(2,21);
+
+    }
+    dateString = dateString.substring(5,7) + "/" + dateString.substring(8,10) + "/" + dateString.substring(0,4) + " " + dateString.substring(11,16);
     return new Date(dateString);
 }
