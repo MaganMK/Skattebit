@@ -10,8 +10,6 @@ import {saveBitfinexTransaction} from "./Exchanges/Bitfinex.js";
 
 let saveCount = 0;
 let fileCount = 0;
-let txCount = 0;
-
 
 var txDiv = document.getElementById("tx-table-div");
 var selector = document.getElementById("year-selector");
@@ -71,7 +69,6 @@ function handleInput(event)
                     let content = e.target.result;
                     let transactions = getTransactions(exchange, content);
                     transactions.length == 0 ? success = false : success = true;
-                    txCount += transactions.length;
                     sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
                     let txs = getAllTransactions();
                     createTable(txs, exchange);
@@ -99,7 +96,7 @@ function handleInput(event)
         document.body.style.cursor  = 'default';
         loading.style.visibility = "hidden";
         selector.disabled = false;
-        if (fileCount == 1 && txCount > 0){
+        if (fileCount == 1){
             setYellow(selector);
         }
         success ? setGreen(fileInput) : setRed(fileInput);

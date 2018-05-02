@@ -20,7 +20,6 @@ export class Transaction {
         {
             sleepFor(70);
         }
-        console.log(this);
     }
 
     toString() {

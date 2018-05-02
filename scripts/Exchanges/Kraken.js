@@ -1,104 +1,81 @@
 import {Transaction} from "../Transaction.js";
 
-
 export function saveKrakenTransaction(data)
 {
+    let transactions = [];
     data = data.split("\n");
-    let typeLine = data[0].split(',').join(',').split(';').join(',').split(','); //Splitter med ; og ,
-    if (typeLine[1] == "refid") //
-    {
-    }
-    //data = data.slice(1);
-
+    data = data.slice(1);
     while (data[data.length-1].length == 0)
     {
         data.splice(-1,1);
     }
-
-
-    for (let index in data) {
-        let lines = [];
-
-        if (data[index].includes(";"))
+    for (let index in data)
+    {
+        let lines = data[index].split(',').join(',').split(';').join(',').split(','); //splitter på ; og ,
+        console.log(lines);
+        for (let i = 0; i < lines.length; i++) //Fjerner ""
         {
-            lines = data[index].split(";");
+            lines[i] = lines[i].split('"').join('');
         }
-        else
-        {
-            lines = data[index].split(",");
-        }
-
-
-        if (lines.length == 1)
+        if (lines[0].length == 0)
         {
             continue;
         }
-
-        let type = lines[3];
-        if(type.includes("\""))
-        {
-            type = type.replace("\"", '');
-            type = type.replace("\"", '');
-            type = type.replace("\"", '');
-            type = type.replace("\"", '');
-        }
-
-
-        let currency = lines[5];
-
-
-        if(currency.includes("\""))
-        {
-            currency = currency.substring(3, currency.length);
-            currency = currency.replace("\"", '');
-            currency = currency.replace("\"", '');
-        }
-        else if(currency != "BCH"){
-            currency = currency.substring(1, currency.length);
-        }
-
-        if(currency == "EUR" || currency == "USD" || currency == "GBP")
+        let name = fixName(lines[5]);
+        if (!isCrypto(name))
         {
             continue;
         }
-
-        let amount = lines[6];
         let date = createDate(lines[2]);
-
-        let transaction;
-
-        if(type == "deposit")
-        {
-            transaction = new Transaction(currency, amount, date, false, "Kraken");
-        }
-        else if(type == "trade")
-        {
-            if(amount > 0)
-            {
-                transaction = new Transaction(currency, Math.abs(amount), date, false, "Kraken");
-            }
-            else {
-                transaction = new Transaction(currency, Math.abs(amount), date, true, "Kraken");
-            }
-        }
-        else if(type == "withdrawal")
-        {
-            transaction = new Transaction(currency, Math.abs(amount), date, true, "Kraken");
-        }
-        transactions.push(transaction);
-
+        let qty = Math.abs(lines[6]);
+        let sale = isSale(lines[3], lines[6]);
+        let tx = new Transaction(name, qty, date, sale, "Kraken");
+        transactions.push(tx);
     }
     return transactions;
 }
 
-
 function createDate(dateString)
 {
-    if(dateString.includes("\""))
-    {
-        dateString = dateString.substring(2,21);
-
-    }
-    dateString = dateString.substring(5,7) + "/" + dateString.substring(8,10) + "/" + dateString.substring(0,4) + " " + dateString.substring(11,16);
+    console.log(dateString);
+    dateString = dateString.substring(5,7) + "/" + dateString.substring(8,10) + "/" + dateString.substring(0,4) + " " + dateString.substring(10,dateString.length);
     return new Date(dateString);
+}
+
+function fixName(currency){ //Noen valutaer starter på xyz osv
+    if (currency.length == 4)
+    {
+        return currency.substring(1);
+    }
+    return currency;
+}
+
+function isCrypto(currency) {
+    let nonCryptos = ["eur", "usd", "gbp"];
+    if (nonCryptos.indexOf(currency.toLowerCase()) == -1)
+    {
+        return true;
+    }
+    return false;
+}
+
+function isSale(type, amount){
+    if (type == "deposit")
+    {
+        return false;
+    }
+    if (type == "withdrawal")
+    {
+        return true;
+    }
+    if (type == "trade")
+    {
+        if (amount < 0)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
