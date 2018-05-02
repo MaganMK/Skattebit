@@ -58,19 +58,6 @@ export class Transaction {
 
 function calculateUnitPrice(tx)
 {
-    let name = tx.name;
-
-    if(tx.name == "IOTA")
-    {
-        name = "IOT";
-    }
-    else if(tx.name == "XBT")
-    {
-        name = "BTC";
-    }
-
-    console.log(name);
-
     let timestamp = new Date(tx.date).getTime()/1000;
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="
         + name + "&tsyms=" + "NOK" + "&ts=" + timestamp;
@@ -85,7 +72,7 @@ function calculateUnitPrice(tx)
 }
 
 function fixName(name) {
-    let fixes = {"ANS": "NEO", "BCC": "BCH"};
+    let fixes = {"ANS": "NEO", "BCC": "BCH", "IOTA": "IOT", "XBT": "BTC"};
     if (name in fixes)
     {
         return fixes[name]

@@ -42,22 +42,22 @@ export function saveKrakenTransaction(data)
         }
 
 
-        let currencie = lines[5];
+        let currency = lines[5];
 
 
-        if(currencie.includes("\""))
+        if(currency.includes("\""))
         {
-            currencie = currencie.substring(3, currencie.length);
-            currencie = currencie.replace("\"", '');
-            currencie = currencie.replace("\"", '');
+            currency = currency.substring(3, currency.length);
+            currency = currency.replace("\"", '');
+            currency = currency.replace("\"", '');
         }
-        else if(currencie != "BCH"){
-            currencie = currencie.substring(1, currencie.length);
+        else if(currency != "BCH"){
+            currency = currency.substring(1, currency.length);
         }
 
 
 
-        if(currencie == "EUR" || currencie == "USD" || currencie == "GBP")
+        if(currency == "EUR" || currency == "USD" || currency == "GBP")
         {
             continue;
         }
@@ -70,21 +70,21 @@ export function saveKrakenTransaction(data)
 
         if(type == "deposit")
         {
-            transaction = new Transaction(currencie, amount, date, false, "Kraken");
+            transaction = new Transaction(currency, amount, date, false, "Kraken");
         }
         else if(type == "trade")
         {
             if(amount > 0)
             {
-                transaction = new Transaction(currencie, amount, date, false, "Kraken");
+                transaction = new Transaction(currency, Math.abs(amount), date, false, "Kraken");
             }
             else {
-                transaction = new Transaction(currencie, -amount, date, true, "Kraken");
+                transaction = new Transaction(currency, Math.abs(amount), date, true, "Kraken");
             }
         }
         else if(type == "withdrawal")
         {
-            transaction = new Transaction(currencie, -amount, date, true, "Kraken");
+            transaction = new Transaction(currency, Math.abs(amount), date, true, "Kraken");
         }
         transactions.push(transaction);
 
