@@ -44,7 +44,6 @@ export function saveBittrexTransaction(data)
         {
             continue;
         }
-        console.log(line);
         let type = line[2];
         let currencies = line[1].split("-");
 
@@ -52,12 +51,8 @@ export function saveBittrexTransaction(data)
 
         let buyTransaction;
         let sellTransaction;
-        console.log(date);
-        console.log(type);
-        console.log(currencies);
         if(type == "LIMIT_SELL")
         {
-            console.log(type);
             buyTransaction = new Transaction(currencies[0], line[6], date, false, "Bittrex");
             sellTransaction = new Transaction(currencies[1], line[3], date, true, "Bittrex");
         }
@@ -65,12 +60,9 @@ export function saveBittrexTransaction(data)
             sellTransaction = new Transaction(currencies[0], line[6], date, true, "Bittrex");
             buyTransaction = new Transaction(currencies[1], line[3], date, false, "Bittrex");
         }
-        console.log(sellTransaction);
-        console.log(buyTransaction);
         transactions.push(sellTransaction);
         transactions.push(buyTransaction);
     }
-
     return transactions;
 }
 
@@ -78,8 +70,6 @@ export function saveBittrexTransaction(data)
 // TODO: se på denne
 function createDate(dateString)
 {
-    console.log(dateString);
-
     return new Date(dateString);
 }
 

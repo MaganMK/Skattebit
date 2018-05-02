@@ -50,7 +50,6 @@ export function saveBitfinexTransaction(data)
         {
             tx = new Transaction(currencies[0], amount, date, false, "Bitfinex");
         }
-        console.log(tx);
         transactions.push(tx);
     }
 

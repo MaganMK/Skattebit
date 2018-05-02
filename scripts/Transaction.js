@@ -12,7 +12,6 @@ export class Transaction {
         this.site = site;
         this.representation = this.toString();
 
-
         if(globalCounter >= 280)
         {
             sleepFor(350); // Må senke raten betraktelig for å ikke gå over "300 uthentinger pr min"-grensen til apiet
@@ -21,9 +20,6 @@ export class Transaction {
         {
             sleepFor(70);
         }
-        console.log(this);
-        console.log(globalCounter);
-
     }
 
     toString() {
@@ -60,7 +56,7 @@ function calculateUnitPrice(tx)
 {
     let timestamp = new Date(tx.date).getTime()/1000;
     let url = "https://min-api.cryptocompare.com/data/pricehistorical?fsym="
-        + name + "&tsyms=" + "NOK" + "&ts=" + timestamp;
+        + tx.name + "&tsyms=" + "NOK" + "&ts=" + timestamp;
     let res = $.ajax({
         type: "GET",
         url: url,
@@ -68,7 +64,7 @@ function calculateUnitPrice(tx)
         async: false
     }).responseText;
     let json = JSON.parse(res);
-    return json[name]["NOK"];
+    return json[tx.name]["NOK"];
 }
 
 function fixName(name) {
