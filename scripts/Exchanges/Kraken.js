@@ -3,9 +3,12 @@ import {Transaction} from "../Transaction.js";
 
 export function saveKrakenTransaction(data)
 {
-    let transactions = [];
     data = data.split("\n");
-    data = data.slice(1);
+    let typeLine = data[0].split(',').join(',').split(';').join(',').split(','); //Splitter med ; og ,
+    if (typeLine[1] == "refid") //
+    {
+    }
+    //data = data.slice(1);
 
     while (data[data.length-1].length == 0)
     {
@@ -31,7 +34,6 @@ export function saveKrakenTransaction(data)
             continue;
         }
 
-        console.log(lines);
         let type = lines[3];
         if(type.includes("\""))
         {
@@ -55,8 +57,6 @@ export function saveKrakenTransaction(data)
             currency = currency.substring(1, currency.length);
         }
 
-
-
         if(currency == "EUR" || currency == "USD" || currency == "GBP")
         {
             continue;
@@ -64,7 +64,6 @@ export function saveKrakenTransaction(data)
 
         let amount = lines[6];
         let date = createDate(lines[2]);
-
 
         let transaction;
 

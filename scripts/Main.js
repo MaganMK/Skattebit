@@ -10,6 +10,7 @@ import {saveBitfinexTransaction} from "./Exchanges/Bitfinex.js";
 
 let saveCount = 0;
 let fileCount = 0;
+let txCount = 0;
 
 
 var txDiv = document.getElementById("tx-table-div");
@@ -61,9 +62,7 @@ function handleInput(event)
         {
             let reader = new FileReader();
 
-
             reader.readAsText(file.files[0], "utf-8");
-
 
             reader.onload = function(e)
             {
@@ -71,32 +70,36 @@ function handleInput(event)
                 //try {
                     let content = e.target.result;
                     let transactions = getTransactions(exchange, content);
-                    console.log(transactions);
                     transactions.length == 0 ? success = false : success = true;
+                    txCount += transactions.length;
                     sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
                     let txs = getAllTransactions();
                     createTable(txs, exchange);
-                /*} catch (err) //Catcher om filen er encodet i utf16
+                /*}
+                catch (err) //Catcher om filen er encodet i utf16
                 {
-                    return;
-                     Dette må løses på en annen måte, nå ender man i en evig loop om man kommer ned hit
-                    reader.readAsText(file.files[0], "utf-16");
-                    let content = e.target.result;
-                    let transactions = getTransactions(exchange, content);
-                    sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
-                    let txs = getAllTransactions();
-                    createTable(txs, exchange);
-
-                }*/
+                    try {
+                        reader.readAsText(file.files[0], "utf-16");
+                        let content = e.target.result;
+                        let transactions = getTransactions(exchange, content);
+                        transactions.length == 0 ? success = false : success = true;
+                        txCount += transactions.length;
+                        sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
+                        let txs = getAllTransactions();
+                        createTable(txs, exchange);
+                    } catch (err) {
+                        setRed(fileInput);
+                        document.body.style.cursor  = 'default';
+                        return;
+                    }
+                }
+                */
             };
-
         }
         document.body.style.cursor  = 'default';
         loading.style.visibility = "hidden";
         selector.disabled = false;
-        if (fileCount == 1){
-
-
+        if (fileCount == 1 && txCount > 0){
             setYellow(selector);
         }
         success ? setGreen(fileInput) : setRed(fileInput);
