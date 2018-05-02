@@ -12,7 +12,6 @@ export function saveKrakenTransaction(data)
     for (let index in data)
     {
         let lines = data[index].split(',').join(',').split(';').join(',').split(','); //splitter på ; og ,
-        console.log(lines);
         for (let i = 0; i < lines.length; i++) //Fjerner ""
         {
             lines[i] = lines[i].split('"').join('');
@@ -37,7 +36,6 @@ export function saveKrakenTransaction(data)
 
 function createDate(dateString)
 {
-    console.log(dateString);
     dateString = dateString.substring(5,7) + "/" + dateString.substring(8,10) + "/" + dateString.substring(0,4) + " " + dateString.substring(10,dateString.length);
     return new Date(dateString);
 }
