@@ -1,11 +1,4 @@
-//from backend.Transaction import * ;
-//from backend.Exchanges.Exchange import Exchange;
-
-
 import {Transaction} from "../Transaction.js";
-
-
-
 
 // 0 --> id = 8a9bf807 - f899 - 4c07 - 95b8 - 9d312ef1e192
 // 1 --> exchange = BTC - ADA
@@ -19,23 +12,10 @@ import {Transaction} from "../Transaction.js";
 export function saveBittrexTransaction(data)
 {
     let transactions = [];
-    data = data.split("\n");
     data = data.slice(1);
-    while (data[data.length-1].length == 0)
-    {
-        data.splice(-1,1);
-    }
     for (let index in data)
     {
-        let line;
-        if(data[index].includes(";"))
-        {
-            line = data[index].split(";")
-        }
-        else
-        {
-            line = data[index].split(",");
-        }
+        let line = data[index].split(',').join(',').split(';').join(',').split(',');
         if (line[0].length == 0)
         {
             continue;

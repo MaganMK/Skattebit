@@ -15,17 +15,11 @@ export function savePoloniexTransaction(data)
     //8 Order Number 19358155617
     //9 Base Total Less Fee 0.00369144
     //10 Quote Total Less Fee -986.8518663
-
     let transactions = [];
-    data = data.split("\n");
     data = data.slice(1);
-    while (data[data.length-1].length == 0)
-    {
-        data.splice(-1,1);
-    }
     for (let index in data)
     {
-        let lines = data[index].split(",");
+        let lines = data[index].split(',').join(',').split(';').join(',').split(',');
         if (lines[0].length == 0)
         {
             continue;

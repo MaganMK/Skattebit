@@ -1,31 +1,13 @@
 import {Transaction} from "../Transaction.js";
 
-
 export function saveBitfinexTransaction(data)
 {
-    console.log(data);
-
-
     let transactions = [];
-    data = data.split("\n");
     data = data.slice(1);
-
-    while (data[data.length-1].length == 0)
-    {
-        data.splice(-1,1);
-    }
 
     for (let index in data)
     {
-        let line;
-        if(data[index].match(";"))
-        {
-            line = data[index].split(";");
-        }
-        else
-        {
-            line = data[index].split(",")
-        }
+        let line = data[index].split(',').join(',').split(';').join(',').split(',');
 
 
         if (line[0].length == 0)
@@ -37,8 +19,6 @@ export function saveBitfinexTransaction(data)
 
         let date = createDate(line[6]);
         let amount = line[2];
-
-
 
         let tx;
 
@@ -52,13 +32,11 @@ export function saveBitfinexTransaction(data)
         }
         transactions.push(tx);
     }
-
     return transactions;
 }
 
 function createDate(dateString)
 {
     dateString = dateString.substring(5,7) + "/" + dateString.substring(8,10) + "/" + dateString.substring(0,4) + " " + dateString.substring(11,16);
-    console.log(dateString);
     return new Date(dateString);
 }

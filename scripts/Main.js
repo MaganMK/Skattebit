@@ -67,7 +67,8 @@ function handleInput(event)
 
                 //try {
                     let content = e.target.result;
-                    let transactions = getTransactions(exchange, content);
+                    let contentList = listifyFileContent(content);
+                    let transactions = getTransactions(exchange, contentList);
                     transactions.length == 0 ? success = false : success = true;
                     sessionStorage.setItem(saveCount++, JSON.stringify(transactions));
                     let txs = getAllTransactions();
@@ -297,4 +298,15 @@ $('#generic-info').click(function (e) {
 function sleepFor( sleepDuration ){
     var now = new Date().getTime();
     while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
+}
+
+//splitter på n og fjerner tomme siste-linjer. Kan utvides til å fjerne alle andre blanke linjer også
+function listifyFileContent(content)
+{
+    let data = content.split("\n");
+    while (data[data.length-1].length == 0)
+    {
+        data.splice(-1,1);
+    }
+    return data;
 }

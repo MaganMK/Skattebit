@@ -20,21 +20,10 @@ export function saveCoinbaseTransaction(data)
     //05/06/2017 10:02, 0.22623156, 0.22623156, ETH, 592684de2205ad0a29e923da, Bought 0.22623156 ETH for €52.00 EUR.,
     //  false, 52, EUR, 2, EUR, Visa debit ** ** ** ** 0040, 59358e83ae4b985bafce2a36, , , , , , , , 59358e8b79b72ea963dad41f,
     let transactions = [];
-    data = data.split("\n");
     data = data.slice(5);
-    while (data[data.length-1].length == 0)
-    {
-        data.splice(-1,1);
-    }
-    /*
-    let index = 0;
-    setTimeout(function () {
-
-    },100);
-    */
     for (let index in data)
     {
-        let lines = data[index].split(",");
+        let lines = data[index].split(',').join(',').split(';').join(',').split(',');
         if (lines[0].length == 0)
         {
             continue;
@@ -84,9 +73,6 @@ function getType(notes)
     }
 }
 
-
-// TODO: se på denne
-//05/06/2017 10:02
 function createDate(dateString)
 {
     if(dateString.match("-"))
@@ -97,8 +83,6 @@ function createDate(dateString)
     {
         dateString = dateString.substring(3,5)+ "/" + dateString.substring(0,3)  +"/" + dateString.substring(6,16);
     }
-
-
     return new Date(dateString);
 }
 

@@ -11,25 +11,10 @@ export function saveBinanceTransaction(data)
     //6 fee (gebyr i feecoin) = 0.034
     //7 fee coin = VEN
     let transactions = [];
-    data = data.split("\n");
     data = data.slice(1);
-    while (data[data.length-1].length == 0)
-    {
-        data.splice(-1,1);
-    }
     for (let index in data)
     {
-        let lines = [];
-
-        if(data[index].match(";"))
-        {
-
-            lines = data[index].split(";");
-        }
-        else
-        {
-            lines = data[index].split(",");
-        }
+        let lines = data[index].split(',').join(',').split(';').join(',').split(',');
 
         if (lines[0].length == 0)
         {
@@ -52,10 +37,8 @@ export function saveBinanceTransaction(data)
             buyTransaction = new Transaction(currencies[0], lines[4], date, false, "Binance");
             sellTransaction = new Transaction(currencies[1], lines[5], date, true, "Binance");
         }
-
         transactions.push(sellTransaction);
         transactions.push(buyTransaction);
-
     }
 
     return transactions;
@@ -77,7 +60,6 @@ function getTradingPair(line)
     return result
 }
 
-// TODO: se på denne
 function createDate(dateString)
 {
     return new Date(dateString);

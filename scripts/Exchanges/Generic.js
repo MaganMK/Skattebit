@@ -4,16 +4,7 @@ import {Transaction} from "../Transaction.js";
 export function saveGenericTransaction(data)
 {
     let transactions = [];
-    data = data.split("\n");
-    let firstLine;
-    if(data[0].match(";"))
-    {
-        firstLine = data[0].split(";");
-    }
-    else
-    {
-        firstLine = data[0].split(",");
-    }
+    let firstLine =  data[0].split(',').join(',').split(';').join(',').split(',');
 
     data = data.slice(1);
 
@@ -29,25 +20,14 @@ export function saveGenericTransaction(data)
         data.splice(-1,1);
     }
 
-
-
     while (data[data.length-1].split(",")[0].length == 0)
     {
         data.splice(-1,1);
     }
 
-
     for (let index in data)
     {
-        let lines;
-        if(data[index].match(";"))
-        {
-            lines = data[index].split(";");
-        }
-        else
-        {
-            lines = data[index].split(",");
-        }
+        let lines = data[index].split(',').join(',').split(';').join(',').split(',');
 
         for (let i in lines)
         {
@@ -62,16 +42,10 @@ export function saveGenericTransaction(data)
                     lines[i] = lines[i].substring(1);
                 }
             }
-
         }
-
-        console.log(lines);
-
         let name = lines[pointers["valuta"]];
         let qty = lines[pointers["mengde"]];
         let type = lines[pointers["type"]].toLowerCase();
-        //let market = lines[pointers["marked"]];
-        //market = (market.length == 0 ? "generisk" : market);
         let market = "Egendefinert";
         let date = createDate(lines[pointers["tidspunkt"]]);
         let tx;
@@ -85,7 +59,6 @@ export function saveGenericTransaction(data)
         }
         transactions.push(tx);
     }
-
     return transactions;
 }
 

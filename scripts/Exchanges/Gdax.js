@@ -6,16 +6,10 @@ import {Transaction} from "../Transaction.js";
 export function saveGdaxTransaction(data)
 {
     let transactions = [];
-    data = data.split("\n");
     data = data.slice(1);
-
-    while (data[data.length-1].length == 0)
-    {
-        data.splice(-1,1);
-    }
     for (let index in data)
     {
-        let lines = data[index].split(",");
+        let lines = data[index].split(',').join(',').split(';').join(',').split(',');
         if (lines[0].length == 0)
         {
             continue;
@@ -67,9 +61,6 @@ export function saveGdaxTransaction(data)
                 {
                     transactions.push(buyTransaction);
                 }
-
-
-
         }
         catch (e) {
 
