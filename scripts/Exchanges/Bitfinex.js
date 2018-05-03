@@ -7,13 +7,7 @@ export function saveBitfinexTransaction(data)
 
     for (let index in data)
     {
-        let line = data[index].split(',').join(',').split(';').join(',').split(',');
-
-
-        if (line[0].length == 0)
-        {
-            continue;
-        }
+        let line = data[index];
 
         let currencies = line[1].split("/");
 
@@ -24,7 +18,7 @@ export function saveBitfinexTransaction(data)
 
         if(amount < 0)
         {
-            tx = new Transaction(currencies[0], -amount, date, true, "Bitfinex");
+            tx = new Transaction(currencies[0], Math.abs(amount), date, true, "Bitfinex");
         }
         else
         {

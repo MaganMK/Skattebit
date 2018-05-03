@@ -23,11 +23,7 @@ export function saveCoinbaseTransaction(data)
     data = data.slice(5);
     for (let index in data)
     {
-        let lines = data[index].split(',').join(',').split(';').join(',').split(',');
-        if (lines[0].length == 0)
-        {
-            continue;
-        }
+        let lines = data[index];
         try{
             if (isTransaction(lines))
             {

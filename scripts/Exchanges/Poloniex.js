@@ -19,11 +19,7 @@ export function savePoloniexTransaction(data)
     data = data.slice(1);
     for (let index in data)
     {
-        let lines = data[index].split(',').join(',').split(';').join(',').split(',');
-        if (lines[0].length == 0)
-        {
-            continue;
-        }
+        let lines = data[index];
         if (lines[2] == "Exchange")
         {
             let currencies = lines[1].split("/");

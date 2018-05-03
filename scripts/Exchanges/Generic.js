@@ -4,7 +4,7 @@ import {Transaction} from "../Transaction.js";
 export function saveGenericTransaction(data)
 {
     let transactions = [];
-    let firstLine =  data[0].split(',').join(',').split(';').join(',').split(',');
+    let firstLine =  data[0];
 
     data = data.slice(1);
 
@@ -13,21 +13,11 @@ export function saveGenericTransaction(data)
         let val = firstLine[i].toLowerCase();
         val = val.split(' ').join('');
         pointers[val] = i;
-
-    }
-    while (data[data.length-1].length == 0)
-    {
-        data.splice(-1,1);
-    }
-
-    while (data[data.length-1].split(",")[0].length == 0)
-    {
-        data.splice(-1,1);
     }
 
     for (let index in data)
     {
-        let lines = data[index].split(',').join(',').split(';').join(',').split(',');
+        let lines = data[index];
 
         for (let i in lines)
         {

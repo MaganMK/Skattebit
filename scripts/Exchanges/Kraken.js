@@ -6,14 +6,10 @@ export function saveKrakenTransaction(data)
     data = data.slice(1);
     for (let index in data)
     {
-        let lines = data[index].split(',').join(',').split(';').join(',').split(','); //splitter på ; og ,
+        let lines = data[index];
         for (let i = 0; i < lines.length; i++) //Fjerner ""
         {
             lines[i] = lines[i].split('"').join('');
-        }
-        if (lines[0].length == 0)
-        {
-            continue;
         }
         let name = fixName(lines[5]);
         if (!isCrypto(name))

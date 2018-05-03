@@ -15,19 +15,12 @@ export function saveBittrexTransaction(data)
     data = data.slice(1);
     for (let index in data)
     {
-        let line = data[index].split(',').join(',').split(';').join(',').split(',');
-        if (line[0].length == 0)
-        {
-            continue;
-        }
-        if(line.length == 1)
-        {
-            continue;
-        }
+        let line = data[index];
+
         let type = line[2];
         let currencies = line[1].split("-");
 
-        let date = createDate(line[8]); // TODO: Denne  å vi fikse
+        let date = createDate(line[8]);
 
         let buyTransaction;
         let sellTransaction;
@@ -47,15 +40,9 @@ export function saveBittrexTransaction(data)
 }
 
 
-// TODO: se på denne
 function createDate(dateString)
 {
     return new Date(dateString);
-}
-
-function sleepFor( sleepDuration ){
-    var now = new Date().getTime();
-    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
 }
 
 

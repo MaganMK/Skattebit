@@ -300,7 +300,7 @@ function sleepFor( sleepDuration ){
     while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
 }
 
-//splitter på n og fjerner tomme siste-linjer. Kan utvides til å fjerne alle andre blanke linjer også
+//Gjør om filinnhold til liste, slik at det blir standard for alle exchanges
 function listifyFileContent(content)
 {
     let data = content.split("\n");
@@ -308,5 +308,14 @@ function listifyFileContent(content)
     {
         data.splice(-1,1);
     }
-    return data;
+    let result = [];
+    for (let i = 0; i < data.length; i++)
+    {
+        let lines = data[i].split(',').join(',').split(';').join(',').split(',');
+        if (lines.length > 1 && lines[0].length > 0)
+        {
+            result.push(lines);
+        }
+    }
+    return result;
 }

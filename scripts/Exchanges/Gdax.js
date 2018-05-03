@@ -9,11 +9,7 @@ export function saveGdaxTransaction(data)
     data = data.slice(1);
     for (let index in data)
     {
-        let lines = data[index].split(',').join(',').split(';').join(',').split(',');
-        if (lines[0].length == 0)
-        {
-            continue;
-        }
+        let lines = data[index];
         try{
                 let type = lines[2];
                 let date = createDate(lines[3]);
@@ -67,7 +63,6 @@ export function saveGdaxTransaction(data)
         }
 
     }
-
     return transactions;
 }
 
